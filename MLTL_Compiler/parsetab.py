@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'leftANDORleftGLOBALUNTILleftNEGNEXTleftLPARENRPARENATOMICLBRACKRBRACKAND ATOMIC COMMA FALSE GLOBAL LBRACK LPAREN NEG NEXT NUMBER OR RBRACK RPAREN TRUE UNTIL\n\texpression \t: expression AND expression\n\t\t\t\t| NEG expression\n\t\t\t\t| NEXT expression\n\t\t\t\t| expression OR expression\n\t\t\t\t| GLOBAL LBRACK NUMBER RBRACK expression\n\t\t\t\t| GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression\n\t\t\t\t| expression UNTIL LBRACK NUMBER RBRACK expression\n\t\t\t\t| expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression\t\t\t\t\n\texpression : LPAREN expression RPARENexpression : ATOMIC\n\texpression : TRUE\n\t\t\t\t| FALSE\n\t'
+_lr_signature = 'leftSEMIleftCOMMAleftANDORIMPLYEQleftGLOBALFUTUREUNTILRELEASEleftNEGYESTERDAYSINCEleftLPARENRPARENATOMICLBRACKRBRACKAND ATOMIC COMMA EQ FALSE FUTURE GLOBAL HISTORICALLY IMPLY LBRACK LPAREN NEG NUMBER ONCE OR RBRACK RELEASE RPAREN SEMI SINCE TRUE UNTIL YESTERDAY\n    program : program statement\n            | statement\n    \n    statement : expression SEMI\n    \n    expression  : expression AND expression\n                | NEG expression\n                | expression OR expression\n                | expression EQ expression\n                | expression IMPLY expression\n    \n    expression  : GLOBAL LBRACK NUMBER RBRACK expression\n                | GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression\n                | FUTURE LBRACK NUMBER RBRACK expression\n                | FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression\n                | expression UNTIL LBRACK NUMBER RBRACK expression\n                | expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression\n                | expression RELEASE LBRACK NUMBER RBRACK expression\n                | expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression\n    \n    expression  : YESTERDAY expression\n                | expression SINCE expression\n                | expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression\n                | ONCE expression\n                | ONCE LBRACK NUMBER RBRACK expression\n                | ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression\n                | HISTORICALLY expression\n                | HISTORICALLY LBRACK NUMBER RBRACK expression\n                | HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression\n    expression : LPAREN expression RPARENexpression : ATOMIC\n    expression : TRUE\n               | FALSE\n    '
     
-_lr_action_items = {'NEG':([0,2,3,5,9,10,22,24,30,31,],[2,2,2,2,2,2,2,2,2,2,]),'NEXT':([0,2,3,5,9,10,22,24,30,31,],[3,3,3,3,3,3,3,3,3,3,]),'GLOBAL':([0,2,3,5,9,10,22,24,30,31,],[4,4,4,4,4,4,4,4,4,4,]),'LPAREN':([0,2,3,5,9,10,22,24,30,31,],[5,5,5,5,5,5,5,5,5,5,]),'ATOMIC':([0,2,3,5,9,10,22,24,30,31,],[6,6,6,6,6,6,6,6,6,6,]),'TRUE':([0,2,3,5,9,10,22,24,30,31,],[7,7,7,7,7,7,7,7,7,7,]),'FALSE':([0,2,3,5,9,10,22,24,30,31,],[8,8,8,8,8,8,8,8,8,8,]),'$end':([1,6,7,8,12,13,16,17,20,26,28,32,33,],[0,-10,-11,-12,-2,-3,-1,-4,-9,-5,-7,-6,-8,]),'AND':([1,6,7,8,12,13,15,16,17,20,26,28,32,33,],[9,-10,-11,-12,-2,-3,9,-1,-4,-9,-5,-7,-6,-8,]),'OR':([1,6,7,8,12,13,15,16,17,20,26,28,32,33,],[10,-10,-11,-12,-2,-3,10,-1,-4,-9,-5,-7,-6,-8,]),'UNTIL':([1,6,7,8,12,13,15,16,17,20,26,28,32,33,],[11,-10,-11,-12,-2,-3,11,11,11,-9,-5,-7,-6,-8,]),'LBRACK':([4,11,],[14,18,]),'RPAREN':([6,7,8,12,13,15,16,17,20,26,28,32,33,],[-10,-11,-12,-2,-3,20,-1,-4,-9,-5,-7,-6,-8,]),'NUMBER':([14,18,23,25,],[19,21,27,29,]),'RBRACK':([19,21,27,29,],[22,24,30,31,]),'COMMA':([19,21,],[23,25,]),}
+_lr_action_items = {'NEG':([0,1,2,4,7,8,9,10,14,15,16,17,18,19,22,48,50,52,54,56,58,74,75,76,77,78,79,80,],[4,4,-2,4,4,4,4,4,-1,-3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,]),'GLOBAL':([0,1,2,4,7,8,9,10,14,15,16,17,18,19,22,48,50,52,54,56,58,74,75,76,77,78,79,80,],[5,5,-2,5,5,5,5,5,-1,-3,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,]),'FUTURE':([0,1,2,4,7,8,9,10,14,15,16,17,18,19,22,48,50,52,54,56,58,74,75,76,77,78,79,80,],[6,6,-2,6,6,6,6,6,-1,-3,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,]),'YESTERDAY':([0,1,2,4,7,8,9,10,14,15,16,17,18,19,22,48,50,52,54,56,58,74,75,76,77,78,79,80,],[7,7,-2,7,7,7,7,7,-1,-3,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,]),'ONCE':([0,1,2,4,7,8,9,10,14,15,16,17,18,19,22,48,50,52,54,56,58,74,75,76,77,78,79,80,],[8,8,-2,8,8,8,8,8,-1,-3,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,]),'HISTORICALLY':([0,1,2,4,7,8,9,10,14,15,16,17,18,19,22,48,50,52,54,56,58,74,75,76,77,78,79,80,],[9,9,-2,9,9,9,9,9,-1,-3,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,]),'LPAREN':([0,1,2,4,7,8,9,10,14,15,16,17,18,19,22,48,50,52,54,56,58,74,75,76,77,78,79,80,],[10,10,-2,10,10,10,10,10,-1,-3,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,]),'ATOMIC':([0,1,2,4,7,8,9,10,14,15,16,17,18,19,22,48,50,52,54,56,58,74,75,76,77,78,79,80,],[11,11,-2,11,11,11,11,11,-1,-3,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,]),'TRUE':([0,1,2,4,7,8,9,10,14,15,16,17,18,19,22,48,50,52,54,56,58,74,75,76,77,78,79,80,],[12,12,-2,12,12,12,12,12,-1,-3,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,]),'FALSE':([0,1,2,4,7,8,9,10,14,15,16,17,18,19,22,48,50,52,54,56,58,74,75,76,77,78,79,80,],[13,13,-2,13,13,13,13,13,-1,-3,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,]),'$end':([1,2,14,15,],[0,-2,-1,-3,]),'SEMI':([3,11,12,13,23,26,27,29,32,33,34,35,38,44,61,63,65,67,69,71,81,82,83,84,85,86,87,],[15,-27,-28,-29,-5,-17,-20,-23,-4,-6,-7,-8,-18,-26,-9,-11,-21,-24,-13,-15,-10,-12,-22,-25,-14,-16,-19,]),'AND':([3,11,12,13,23,26,27,29,31,32,33,34,35,38,44,61,63,65,67,69,71,81,82,83,84,85,86,87,],[16,-27,-28,-29,-5,-17,16,16,16,-4,-6,-7,-8,-18,-26,-9,-11,-21,-24,-13,-15,-10,-12,-22,-25,-14,-16,-19,]),'OR':([3,11,12,13,23,26,27,29,31,32,33,34,35,38,44,61,63,65,67,69,71,81,82,83,84,85,86,87,],[17,-27,-28,-29,-5,-17,17,17,17,-4,-6,-7,-8,-18,-26,-9,-11,-21,-24,-13,-15,-10,-12,-22,-25,-14,-16,-19,]),'EQ':([3,11,12,13,23,26,27,29,31,32,33,34,35,38,44,61,63,65,67,69,71,81,82,83,84,85,86,87,],[18,-27,-28,-29,-5,-17,18,18,18,-4,-6,-7,-8,-18,-26,-9,-11,-21,-24,-13,-15,-10,-12,-22,-25,-14,-16,-19,]),'IMPLY':([3,11,12,13,23,26,27,29,31,32,33,34,35,38,44,61,63,65,67,69,71,81,82,83,84,85,86,87,],[19,-27,-28,-29,-5,-17,19,19,19,-4,-6,-7,-8,-18,-26,-9,-11,-21,-24,-13,-15,-10,-12,-22,-25,-14,-16,-19,]),'UNTIL':([3,11,12,13,23,26,27,29,31,32,33,34,35,38,44,61,63,65,67,69,71,81,82,83,84,85,86,87,],[20,-27,-28,-29,-5,-17,20,20,20,20,20,20,20,-18,-26,-9,-11,-21,-24,-13,-15,-10,-12,-22,-25,-14,-16,-19,]),'RELEASE':([3,11,12,13,23,26,27,29,31,32,33,34,35,38,44,61,63,65,67,69,71,81,82,83,84,85,86,87,],[21,-27,-28,-29,-5,-17,21,21,21,21,21,21,21,-18,-26,-9,-11,-21,-24,-13,-15,-10,-12,-22,-25,-14,-16,-19,]),'SINCE':([3,11,12,13,23,26,27,29,31,32,33,34,35,38,44,61,63,65,67,69,71,81,82,83,84,85,86,87,],[22,-27,-28,-29,-5,-17,22,22,22,22,22,22,22,-18,-26,-9,-11,-21,-24,-13,-15,-10,-12,-22,-25,-14,-16,-19,]),'LBRACK':([5,6,8,9,20,21,22,],[24,25,28,30,36,37,39,]),'RPAREN':([11,12,13,23,26,27,29,31,32,33,34,35,38,44,61,63,65,67,69,71,81,82,83,84,85,86,87,],[-27,-28,-29,-5,-17,-20,-23,44,-4,-6,-7,-8,-18,-26,-9,-11,-21,-24,-13,-15,-10,-12,-22,-25,-14,-16,-19,]),'NUMBER':([24,25,28,30,36,37,39,49,51,53,55,57,59,60,],[40,41,42,43,45,46,47,62,64,66,68,70,72,73,]),'RBRACK':([40,41,42,43,45,46,62,64,66,68,70,72,73,],[48,50,52,54,56,58,74,75,76,77,78,79,80,]),'COMMA':([40,41,42,43,45,46,47,],[49,51,53,55,57,59,60,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'expression':([0,2,3,5,9,10,22,24,30,31,],[1,12,13,15,16,17,26,28,32,33,]),}
+_lr_goto_items = {'program':([0,],[1,]),'statement':([0,1,],[2,14,]),'expression':([0,1,4,7,8,9,10,16,17,18,19,22,48,50,52,54,56,58,74,75,76,77,78,79,80,],[3,3,23,26,27,29,31,32,33,34,35,38,61,63,65,67,69,71,81,82,83,84,85,86,87,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,17 +26,34 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> expression","S'",1,None,None,None),
-  ('expression -> expression AND expression','expression',3,'p_MLTL_operators','MLTLparse.py',25),
-  ('expression -> NEG expression','expression',2,'p_MLTL_operators','MLTLparse.py',26),
-  ('expression -> NEXT expression','expression',2,'p_MLTL_operators','MLTLparse.py',27),
-  ('expression -> expression OR expression','expression',3,'p_MLTL_operators','MLTLparse.py',28),
-  ('expression -> GLOBAL LBRACK NUMBER RBRACK expression','expression',5,'p_MLTL_operators','MLTLparse.py',29),
-  ('expression -> GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression','expression',7,'p_MLTL_operators','MLTLparse.py',30),
-  ('expression -> expression UNTIL LBRACK NUMBER RBRACK expression','expression',6,'p_MLTL_operators','MLTLparse.py',31),
-  ('expression -> expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression','expression',8,'p_MLTL_operators','MLTLparse.py',32),
-  ('expression -> LPAREN expression RPAREN','expression',3,'p_paren_token','MLTLparse.py',57),
-  ('expression -> ATOMIC','expression',1,'p_atomic_token','MLTLparse.py',61),
-  ('expression -> TRUE','expression',1,'p_bool_token','MLTLparse.py',67),
-  ('expression -> FALSE','expression',1,'p_bool_token','MLTLparse.py',68),
+  ("S' -> program","S'",1,None,None,None),
+  ('program -> program statement','program',2,'p_program','MLTLparse.py',21),
+  ('program -> statement','program',1,'p_program','MLTLparse.py',22),
+  ('statement -> expression SEMI','statement',2,'p_statement','MLTLparse.py',33),
+  ('expression -> expression AND expression','expression',3,'p_prop_operators','MLTLparse.py',39),
+  ('expression -> NEG expression','expression',2,'p_prop_operators','MLTLparse.py',40),
+  ('expression -> expression OR expression','expression',3,'p_prop_operators','MLTLparse.py',41),
+  ('expression -> expression EQ expression','expression',3,'p_prop_operators','MLTLparse.py',42),
+  ('expression -> expression IMPLY expression','expression',3,'p_prop_operators','MLTLparse.py',43),
+  ('expression -> GLOBAL LBRACK NUMBER RBRACK expression','expression',5,'p_ftMLTL_operators','MLTLparse.py',73),
+  ('expression -> GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression','expression',7,'p_ftMLTL_operators','MLTLparse.py',74),
+  ('expression -> FUTURE LBRACK NUMBER RBRACK expression','expression',5,'p_ftMLTL_operators','MLTLparse.py',75),
+  ('expression -> FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression','expression',7,'p_ftMLTL_operators','MLTLparse.py',76),
+  ('expression -> expression UNTIL LBRACK NUMBER RBRACK expression','expression',6,'p_ftMLTL_operators','MLTLparse.py',77),
+  ('expression -> expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression','expression',8,'p_ftMLTL_operators','MLTLparse.py',78),
+  ('expression -> expression RELEASE LBRACK NUMBER RBRACK expression','expression',6,'p_ftMLTL_operators','MLTLparse.py',79),
+  ('expression -> expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression','expression',8,'p_ftMLTL_operators','MLTLparse.py',80),
+  ('expression -> YESTERDAY expression','expression',2,'p_ptMLTL_operators','MLTLparse.py',109),
+  ('expression -> expression SINCE expression','expression',3,'p_ptMLTL_operators','MLTLparse.py',110),
+  ('expression -> expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression','expression',8,'p_ptMLTL_operators','MLTLparse.py',111),
+  ('expression -> ONCE expression','expression',2,'p_ptMLTL_operators','MLTLparse.py',112),
+  ('expression -> ONCE LBRACK NUMBER RBRACK expression','expression',5,'p_ptMLTL_operators','MLTLparse.py',113),
+  ('expression -> ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression','expression',7,'p_ptMLTL_operators','MLTLparse.py',114),
+  ('expression -> HISTORICALLY expression','expression',2,'p_ptMLTL_operators','MLTLparse.py',115),
+  ('expression -> HISTORICALLY LBRACK NUMBER RBRACK expression','expression',5,'p_ptMLTL_operators','MLTLparse.py',116),
+  ('expression -> HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression','expression',7,'p_ptMLTL_operators','MLTLparse.py',117),
+  ('expression -> LPAREN expression RPAREN','expression',3,'p_paren_token','MLTLparse.py',160),
+  ('expression -> ATOMIC','expression',1,'p_atomic_token','MLTLparse.py',164),
+  ('expression -> TRUE','expression',1,'p_bool_token','MLTLparse.py',170),
+  ('expression -> FALSE','expression',1,'p_bool_token','MLTLparse.py',171),
 ]

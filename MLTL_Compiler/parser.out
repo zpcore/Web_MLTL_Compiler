@@ -2,551 +2,2321 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
 Grammar
 
-Rule 0     S' -> expression
-Rule 1     expression -> expression AND expression
-Rule 2     expression -> NEG expression
-Rule 3     expression -> NEXT expression
-Rule 4     expression -> expression OR expression
-Rule 5     expression -> GLOBAL LBRACK NUMBER RBRACK expression
-Rule 6     expression -> GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
-Rule 7     expression -> expression UNTIL LBRACK NUMBER RBRACK expression
-Rule 8     expression -> expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
-Rule 9     expression -> LPAREN expression RPAREN
-Rule 10    expression -> ATOMIC
+Rule 0     S' -> program
+Rule 1     program -> program statement
+Rule 2     program -> statement
+Rule 3     statement -> expression SEMI
+Rule 4     expression -> expression AND expression
+Rule 5     expression -> NEG expression
+Rule 6     expression -> expression OR expression
+Rule 7     expression -> expression EQ expression
+Rule 8     expression -> expression IMPLY expression
+Rule 9     expression -> GLOBAL LBRACK NUMBER RBRACK expression
+Rule 10    expression -> GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
+Rule 11    expression -> FUTURE LBRACK NUMBER RBRACK expression
+Rule 12    expression -> FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression
+Rule 13    expression -> expression UNTIL LBRACK NUMBER RBRACK expression
+Rule 14    expression -> expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+Rule 15    expression -> expression RELEASE LBRACK NUMBER RBRACK expression
+Rule 16    expression -> expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+Rule 17    expression -> YESTERDAY expression
+Rule 18    expression -> expression SINCE expression
+Rule 19    expression -> expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+Rule 20    expression -> ONCE expression
+Rule 21    expression -> ONCE LBRACK NUMBER RBRACK expression
+Rule 22    expression -> ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+Rule 23    expression -> HISTORICALLY expression
+Rule 24    expression -> HISTORICALLY LBRACK NUMBER RBRACK expression
+Rule 25    expression -> HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression
+Rule 26    expression -> LPAREN expression RPAREN
+Rule 27    expression -> ATOMIC
+Rule 28    expression -> TRUE
+Rule 29    expression -> FALSE
 
 Terminals, with rules where they appear
 
-AND                  : 1
-ATOMIC               : 10
-COMMA                : 6 8
-GLOBAL               : 5 6
-LBRACK               : 5 6 7 8
-LPAREN               : 9
-NEG                  : 2
-NEXT                 : 3
-NUMBER               : 5 6 6 7 8 8
-OR                   : 4
-RBRACK               : 5 6 7 8
-RPAREN               : 9
-UNTIL                : 7 8
+AND                  : 4
+ATOMIC               : 27
+COMMA                : 10 12 14 16 19 22 25
+EQ                   : 7
+FALSE                : 29
+FUTURE               : 11 12
+GLOBAL               : 9 10
+HISTORICALLY         : 23 24 25
+IMPLY                : 8
+LBRACK               : 9 10 11 12 13 14 15 16 19 21 22 24 25
+LPAREN               : 26
+NEG                  : 5
+NUMBER               : 9 10 10 11 12 12 13 14 14 15 16 16 19 19 21 22 22 24 25 25
+ONCE                 : 20 21 22
+OR                   : 6
+RBRACK               : 9 10 11 12 13 14 15 16 19 21 22 24 25
+RELEASE              : 15 16
+RPAREN               : 26
+SEMI                 : 3
+SINCE                : 18 19
+TRUE                 : 28
+UNTIL                : 13 14
+YESTERDAY            : 17
 error                : 
 
 Nonterminals, with rules where they appear
 
-expression           : 1 1 2 3 4 4 5 6 7 7 8 8 9 0
+expression           : 3 4 4 5 6 6 7 7 8 8 9 10 11 12 13 13 14 14 15 15 16 16 17 18 18 19 19 20 21 22 23 24 25 26
+program              : 1 0
+statement            : 1 2
 
 Parsing method: LALR
 
 state 0
 
-    (0) S' -> . expression
-    (1) expression -> . expression AND expression
-    (2) expression -> . NEG expression
-    (3) expression -> . NEXT expression
-    (4) expression -> . expression OR expression
-    (5) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
-    (6) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
-    (7) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
-    (8) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
-    (9) expression -> . LPAREN expression RPAREN
-    (10) expression -> . ATOMIC
+    (0) S' -> . program
+    (1) program -> . program statement
+    (2) program -> . statement
+    (3) statement -> . expression SEMI
+    (4) expression -> . expression AND expression
+    (5) expression -> . NEG expression
+    (6) expression -> . expression OR expression
+    (7) expression -> . expression EQ expression
+    (8) expression -> . expression IMPLY expression
+    (9) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
+    (10) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (11) expression -> . FUTURE LBRACK NUMBER RBRACK expression
+    (12) expression -> . FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (13) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> . expression RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> . expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (17) expression -> . YESTERDAY expression
+    (18) expression -> . expression SINCE expression
+    (19) expression -> . expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (20) expression -> . ONCE expression
+    (21) expression -> . ONCE LBRACK NUMBER RBRACK expression
+    (22) expression -> . ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (23) expression -> . HISTORICALLY expression
+    (24) expression -> . HISTORICALLY LBRACK NUMBER RBRACK expression
+    (25) expression -> . HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> . LPAREN expression RPAREN
+    (27) expression -> . ATOMIC
+    (28) expression -> . TRUE
+    (29) expression -> . FALSE
 
-    NEG             shift and go to state 2
-    NEXT            shift and go to state 3
-    GLOBAL          shift and go to state 4
-    LPAREN          shift and go to state 5
-    ATOMIC          shift and go to state 6
+    NEG             shift and go to state 4
+    GLOBAL          shift and go to state 5
+    FUTURE          shift and go to state 6
+    YESTERDAY       shift and go to state 7
+    ONCE            shift and go to state 8
+    HISTORICALLY    shift and go to state 9
+    LPAREN          shift and go to state 10
+    ATOMIC          shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
 
-    expression                     shift and go to state 1
+    program                        shift and go to state 1
+    statement                      shift and go to state 2
+    expression                     shift and go to state 3
 
 state 1
 
-    (0) S' -> expression .
-    (1) expression -> expression . AND expression
-    (4) expression -> expression . OR expression
-    (7) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
-    (8) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (0) S' -> program .
+    (1) program -> program . statement
+    (3) statement -> . expression SEMI
+    (4) expression -> . expression AND expression
+    (5) expression -> . NEG expression
+    (6) expression -> . expression OR expression
+    (7) expression -> . expression EQ expression
+    (8) expression -> . expression IMPLY expression
+    (9) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
+    (10) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (11) expression -> . FUTURE LBRACK NUMBER RBRACK expression
+    (12) expression -> . FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (13) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> . expression RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> . expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (17) expression -> . YESTERDAY expression
+    (18) expression -> . expression SINCE expression
+    (19) expression -> . expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (20) expression -> . ONCE expression
+    (21) expression -> . ONCE LBRACK NUMBER RBRACK expression
+    (22) expression -> . ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (23) expression -> . HISTORICALLY expression
+    (24) expression -> . HISTORICALLY LBRACK NUMBER RBRACK expression
+    (25) expression -> . HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> . LPAREN expression RPAREN
+    (27) expression -> . ATOMIC
+    (28) expression -> . TRUE
+    (29) expression -> . FALSE
 
-    AND             shift and go to state 7
-    OR              shift and go to state 8
-    UNTIL           shift and go to state 9
+    NEG             shift and go to state 4
+    GLOBAL          shift and go to state 5
+    FUTURE          shift and go to state 6
+    YESTERDAY       shift and go to state 7
+    ONCE            shift and go to state 8
+    HISTORICALLY    shift and go to state 9
+    LPAREN          shift and go to state 10
+    ATOMIC          shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
 
+    statement                      shift and go to state 14
+    expression                     shift and go to state 3
 
 state 2
 
-    (2) expression -> NEG . expression
-    (1) expression -> . expression AND expression
-    (2) expression -> . NEG expression
-    (3) expression -> . NEXT expression
-    (4) expression -> . expression OR expression
-    (5) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
-    (6) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
-    (7) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
-    (8) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
-    (9) expression -> . LPAREN expression RPAREN
-    (10) expression -> . ATOMIC
+    (2) program -> statement .
 
-    NEG             shift and go to state 2
-    NEXT            shift and go to state 3
-    GLOBAL          shift and go to state 4
-    LPAREN          shift and go to state 5
-    ATOMIC          shift and go to state 6
+    NEG             reduce using rule 2 (program -> statement .)
+    GLOBAL          reduce using rule 2 (program -> statement .)
+    FUTURE          reduce using rule 2 (program -> statement .)
+    YESTERDAY       reduce using rule 2 (program -> statement .)
+    ONCE            reduce using rule 2 (program -> statement .)
+    HISTORICALLY    reduce using rule 2 (program -> statement .)
+    LPAREN          reduce using rule 2 (program -> statement .)
+    ATOMIC          reduce using rule 2 (program -> statement .)
+    TRUE            reduce using rule 2 (program -> statement .)
+    FALSE           reduce using rule 2 (program -> statement .)
+    $end            reduce using rule 2 (program -> statement .)
 
-    expression                     shift and go to state 10
 
 state 3
 
-    (3) expression -> NEXT . expression
-    (1) expression -> . expression AND expression
-    (2) expression -> . NEG expression
-    (3) expression -> . NEXT expression
-    (4) expression -> . expression OR expression
-    (5) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
-    (6) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
-    (7) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
-    (8) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
-    (9) expression -> . LPAREN expression RPAREN
-    (10) expression -> . ATOMIC
+    (3) statement -> expression . SEMI
+    (4) expression -> expression . AND expression
+    (6) expression -> expression . OR expression
+    (7) expression -> expression . EQ expression
+    (8) expression -> expression . IMPLY expression
+    (13) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> expression . RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> expression . RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (18) expression -> expression . SINCE expression
+    (19) expression -> expression . SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
 
-    NEG             shift and go to state 2
-    NEXT            shift and go to state 3
-    GLOBAL          shift and go to state 4
-    LPAREN          shift and go to state 5
-    ATOMIC          shift and go to state 6
+    SEMI            shift and go to state 15
+    AND             shift and go to state 16
+    OR              shift and go to state 17
+    EQ              shift and go to state 18
+    IMPLY           shift and go to state 19
+    UNTIL           shift and go to state 20
+    RELEASE         shift and go to state 21
+    SINCE           shift and go to state 22
 
-    expression                     shift and go to state 11
 
 state 4
 
-    (5) expression -> GLOBAL . LBRACK NUMBER RBRACK expression
-    (6) expression -> GLOBAL . LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (5) expression -> NEG . expression
+    (4) expression -> . expression AND expression
+    (5) expression -> . NEG expression
+    (6) expression -> . expression OR expression
+    (7) expression -> . expression EQ expression
+    (8) expression -> . expression IMPLY expression
+    (9) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
+    (10) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (11) expression -> . FUTURE LBRACK NUMBER RBRACK expression
+    (12) expression -> . FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (13) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> . expression RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> . expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (17) expression -> . YESTERDAY expression
+    (18) expression -> . expression SINCE expression
+    (19) expression -> . expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (20) expression -> . ONCE expression
+    (21) expression -> . ONCE LBRACK NUMBER RBRACK expression
+    (22) expression -> . ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (23) expression -> . HISTORICALLY expression
+    (24) expression -> . HISTORICALLY LBRACK NUMBER RBRACK expression
+    (25) expression -> . HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> . LPAREN expression RPAREN
+    (27) expression -> . ATOMIC
+    (28) expression -> . TRUE
+    (29) expression -> . FALSE
 
-    LBRACK          shift and go to state 12
+    NEG             shift and go to state 4
+    GLOBAL          shift and go to state 5
+    FUTURE          shift and go to state 6
+    YESTERDAY       shift and go to state 7
+    ONCE            shift and go to state 8
+    HISTORICALLY    shift and go to state 9
+    LPAREN          shift and go to state 10
+    ATOMIC          shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
 
+    expression                     shift and go to state 23
 
 state 5
 
-    (9) expression -> LPAREN . expression RPAREN
-    (1) expression -> . expression AND expression
-    (2) expression -> . NEG expression
-    (3) expression -> . NEXT expression
-    (4) expression -> . expression OR expression
-    (5) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
-    (6) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
-    (7) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
-    (8) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
-    (9) expression -> . LPAREN expression RPAREN
-    (10) expression -> . ATOMIC
+    (9) expression -> GLOBAL . LBRACK NUMBER RBRACK expression
+    (10) expression -> GLOBAL . LBRACK NUMBER COMMA NUMBER RBRACK expression
 
-    NEG             shift and go to state 2
-    NEXT            shift and go to state 3
-    GLOBAL          shift and go to state 4
-    LPAREN          shift and go to state 5
-    ATOMIC          shift and go to state 6
+    LBRACK          shift and go to state 24
 
-    expression                     shift and go to state 13
 
 state 6
 
-    (10) expression -> ATOMIC .
+    (11) expression -> FUTURE . LBRACK NUMBER RBRACK expression
+    (12) expression -> FUTURE . LBRACK NUMBER COMMA NUMBER RBRACK expression
 
-    AND             reduce using rule 10 (expression -> ATOMIC .)
-    OR              reduce using rule 10 (expression -> ATOMIC .)
-    UNTIL           reduce using rule 10 (expression -> ATOMIC .)
-    $end            reduce using rule 10 (expression -> ATOMIC .)
-    RPAREN          reduce using rule 10 (expression -> ATOMIC .)
+    LBRACK          shift and go to state 25
 
 
 state 7
 
-    (1) expression -> expression AND . expression
-    (1) expression -> . expression AND expression
-    (2) expression -> . NEG expression
-    (3) expression -> . NEXT expression
-    (4) expression -> . expression OR expression
-    (5) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
-    (6) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
-    (7) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
-    (8) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
-    (9) expression -> . LPAREN expression RPAREN
-    (10) expression -> . ATOMIC
+    (17) expression -> YESTERDAY . expression
+    (4) expression -> . expression AND expression
+    (5) expression -> . NEG expression
+    (6) expression -> . expression OR expression
+    (7) expression -> . expression EQ expression
+    (8) expression -> . expression IMPLY expression
+    (9) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
+    (10) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (11) expression -> . FUTURE LBRACK NUMBER RBRACK expression
+    (12) expression -> . FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (13) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> . expression RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> . expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (17) expression -> . YESTERDAY expression
+    (18) expression -> . expression SINCE expression
+    (19) expression -> . expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (20) expression -> . ONCE expression
+    (21) expression -> . ONCE LBRACK NUMBER RBRACK expression
+    (22) expression -> . ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (23) expression -> . HISTORICALLY expression
+    (24) expression -> . HISTORICALLY LBRACK NUMBER RBRACK expression
+    (25) expression -> . HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> . LPAREN expression RPAREN
+    (27) expression -> . ATOMIC
+    (28) expression -> . TRUE
+    (29) expression -> . FALSE
 
-    NEG             shift and go to state 2
-    NEXT            shift and go to state 3
-    GLOBAL          shift and go to state 4
-    LPAREN          shift and go to state 5
-    ATOMIC          shift and go to state 6
+    NEG             shift and go to state 4
+    GLOBAL          shift and go to state 5
+    FUTURE          shift and go to state 6
+    YESTERDAY       shift and go to state 7
+    ONCE            shift and go to state 8
+    HISTORICALLY    shift and go to state 9
+    LPAREN          shift and go to state 10
+    ATOMIC          shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
 
-    expression                     shift and go to state 14
+    expression                     shift and go to state 26
 
 state 8
 
-    (4) expression -> expression OR . expression
-    (1) expression -> . expression AND expression
-    (2) expression -> . NEG expression
-    (3) expression -> . NEXT expression
-    (4) expression -> . expression OR expression
-    (5) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
-    (6) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
-    (7) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
-    (8) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
-    (9) expression -> . LPAREN expression RPAREN
-    (10) expression -> . ATOMIC
+    (20) expression -> ONCE . expression
+    (21) expression -> ONCE . LBRACK NUMBER RBRACK expression
+    (22) expression -> ONCE . LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (4) expression -> . expression AND expression
+    (5) expression -> . NEG expression
+    (6) expression -> . expression OR expression
+    (7) expression -> . expression EQ expression
+    (8) expression -> . expression IMPLY expression
+    (9) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
+    (10) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (11) expression -> . FUTURE LBRACK NUMBER RBRACK expression
+    (12) expression -> . FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (13) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> . expression RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> . expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (17) expression -> . YESTERDAY expression
+    (18) expression -> . expression SINCE expression
+    (19) expression -> . expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (20) expression -> . ONCE expression
+    (21) expression -> . ONCE LBRACK NUMBER RBRACK expression
+    (22) expression -> . ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (23) expression -> . HISTORICALLY expression
+    (24) expression -> . HISTORICALLY LBRACK NUMBER RBRACK expression
+    (25) expression -> . HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> . LPAREN expression RPAREN
+    (27) expression -> . ATOMIC
+    (28) expression -> . TRUE
+    (29) expression -> . FALSE
 
-    NEG             shift and go to state 2
-    NEXT            shift and go to state 3
-    GLOBAL          shift and go to state 4
-    LPAREN          shift and go to state 5
-    ATOMIC          shift and go to state 6
+    LBRACK          shift and go to state 28
+    NEG             shift and go to state 4
+    GLOBAL          shift and go to state 5
+    FUTURE          shift and go to state 6
+    YESTERDAY       shift and go to state 7
+    ONCE            shift and go to state 8
+    HISTORICALLY    shift and go to state 9
+    LPAREN          shift and go to state 10
+    ATOMIC          shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
 
-    expression                     shift and go to state 15
+    expression                     shift and go to state 27
 
 state 9
 
-    (7) expression -> expression UNTIL . LBRACK NUMBER RBRACK expression
-    (8) expression -> expression UNTIL . LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (23) expression -> HISTORICALLY . expression
+    (24) expression -> HISTORICALLY . LBRACK NUMBER RBRACK expression
+    (25) expression -> HISTORICALLY . LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (4) expression -> . expression AND expression
+    (5) expression -> . NEG expression
+    (6) expression -> . expression OR expression
+    (7) expression -> . expression EQ expression
+    (8) expression -> . expression IMPLY expression
+    (9) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
+    (10) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (11) expression -> . FUTURE LBRACK NUMBER RBRACK expression
+    (12) expression -> . FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (13) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> . expression RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> . expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (17) expression -> . YESTERDAY expression
+    (18) expression -> . expression SINCE expression
+    (19) expression -> . expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (20) expression -> . ONCE expression
+    (21) expression -> . ONCE LBRACK NUMBER RBRACK expression
+    (22) expression -> . ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (23) expression -> . HISTORICALLY expression
+    (24) expression -> . HISTORICALLY LBRACK NUMBER RBRACK expression
+    (25) expression -> . HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> . LPAREN expression RPAREN
+    (27) expression -> . ATOMIC
+    (28) expression -> . TRUE
+    (29) expression -> . FALSE
 
-    LBRACK          shift and go to state 16
+    LBRACK          shift and go to state 30
+    NEG             shift and go to state 4
+    GLOBAL          shift and go to state 5
+    FUTURE          shift and go to state 6
+    YESTERDAY       shift and go to state 7
+    ONCE            shift and go to state 8
+    HISTORICALLY    shift and go to state 9
+    LPAREN          shift and go to state 10
+    ATOMIC          shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
 
+    expression                     shift and go to state 29
 
 state 10
 
-    (2) expression -> NEG expression .
-    (1) expression -> expression . AND expression
-    (4) expression -> expression . OR expression
-    (7) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
-    (8) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> LPAREN . expression RPAREN
+    (4) expression -> . expression AND expression
+    (5) expression -> . NEG expression
+    (6) expression -> . expression OR expression
+    (7) expression -> . expression EQ expression
+    (8) expression -> . expression IMPLY expression
+    (9) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
+    (10) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (11) expression -> . FUTURE LBRACK NUMBER RBRACK expression
+    (12) expression -> . FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (13) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> . expression RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> . expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (17) expression -> . YESTERDAY expression
+    (18) expression -> . expression SINCE expression
+    (19) expression -> . expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (20) expression -> . ONCE expression
+    (21) expression -> . ONCE LBRACK NUMBER RBRACK expression
+    (22) expression -> . ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (23) expression -> . HISTORICALLY expression
+    (24) expression -> . HISTORICALLY LBRACK NUMBER RBRACK expression
+    (25) expression -> . HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> . LPAREN expression RPAREN
+    (27) expression -> . ATOMIC
+    (28) expression -> . TRUE
+    (29) expression -> . FALSE
 
-    AND             reduce using rule 2 (expression -> NEG expression .)
-    OR              reduce using rule 2 (expression -> NEG expression .)
-    UNTIL           reduce using rule 2 (expression -> NEG expression .)
-    $end            reduce using rule 2 (expression -> NEG expression .)
-    RPAREN          reduce using rule 2 (expression -> NEG expression .)
+    NEG             shift and go to state 4
+    GLOBAL          shift and go to state 5
+    FUTURE          shift and go to state 6
+    YESTERDAY       shift and go to state 7
+    ONCE            shift and go to state 8
+    HISTORICALLY    shift and go to state 9
+    LPAREN          shift and go to state 10
+    ATOMIC          shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
 
-  ! AND             [ shift and go to state 7 ]
-  ! OR              [ shift and go to state 8 ]
-  ! UNTIL           [ shift and go to state 9 ]
-
+    expression                     shift and go to state 31
 
 state 11
 
-    (3) expression -> NEXT expression .
-    (1) expression -> expression . AND expression
-    (4) expression -> expression . OR expression
-    (7) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
-    (8) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (27) expression -> ATOMIC .
 
-  ! shift/reduce conflict for AND resolved as shift
-  ! shift/reduce conflict for OR resolved as shift
-  ! shift/reduce conflict for UNTIL resolved as shift
-    $end            reduce using rule 3 (expression -> NEXT expression .)
-    RPAREN          reduce using rule 3 (expression -> NEXT expression .)
-    AND             shift and go to state 7
-    OR              shift and go to state 8
-    UNTIL           shift and go to state 9
-
-  ! AND             [ reduce using rule 3 (expression -> NEXT expression .) ]
-  ! OR              [ reduce using rule 3 (expression -> NEXT expression .) ]
-  ! UNTIL           [ reduce using rule 3 (expression -> NEXT expression .) ]
+    SEMI            reduce using rule 27 (expression -> ATOMIC .)
+    AND             reduce using rule 27 (expression -> ATOMIC .)
+    OR              reduce using rule 27 (expression -> ATOMIC .)
+    EQ              reduce using rule 27 (expression -> ATOMIC .)
+    IMPLY           reduce using rule 27 (expression -> ATOMIC .)
+    UNTIL           reduce using rule 27 (expression -> ATOMIC .)
+    RELEASE         reduce using rule 27 (expression -> ATOMIC .)
+    SINCE           reduce using rule 27 (expression -> ATOMIC .)
+    RPAREN          reduce using rule 27 (expression -> ATOMIC .)
 
 
 state 12
 
-    (5) expression -> GLOBAL LBRACK . NUMBER RBRACK expression
-    (6) expression -> GLOBAL LBRACK . NUMBER COMMA NUMBER RBRACK expression
+    (28) expression -> TRUE .
 
-    NUMBER          shift and go to state 17
+    SEMI            reduce using rule 28 (expression -> TRUE .)
+    AND             reduce using rule 28 (expression -> TRUE .)
+    OR              reduce using rule 28 (expression -> TRUE .)
+    EQ              reduce using rule 28 (expression -> TRUE .)
+    IMPLY           reduce using rule 28 (expression -> TRUE .)
+    UNTIL           reduce using rule 28 (expression -> TRUE .)
+    RELEASE         reduce using rule 28 (expression -> TRUE .)
+    SINCE           reduce using rule 28 (expression -> TRUE .)
+    RPAREN          reduce using rule 28 (expression -> TRUE .)
 
 
 state 13
 
-    (9) expression -> LPAREN expression . RPAREN
-    (1) expression -> expression . AND expression
-    (4) expression -> expression . OR expression
-    (7) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
-    (8) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (29) expression -> FALSE .
 
-    RPAREN          shift and go to state 18
-    AND             shift and go to state 7
-    OR              shift and go to state 8
-    UNTIL           shift and go to state 9
+    SEMI            reduce using rule 29 (expression -> FALSE .)
+    AND             reduce using rule 29 (expression -> FALSE .)
+    OR              reduce using rule 29 (expression -> FALSE .)
+    EQ              reduce using rule 29 (expression -> FALSE .)
+    IMPLY           reduce using rule 29 (expression -> FALSE .)
+    UNTIL           reduce using rule 29 (expression -> FALSE .)
+    RELEASE         reduce using rule 29 (expression -> FALSE .)
+    SINCE           reduce using rule 29 (expression -> FALSE .)
+    RPAREN          reduce using rule 29 (expression -> FALSE .)
 
 
 state 14
 
-    (1) expression -> expression AND expression .
-    (1) expression -> expression . AND expression
-    (4) expression -> expression . OR expression
-    (7) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
-    (8) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (1) program -> program statement .
 
-    AND             reduce using rule 1 (expression -> expression AND expression .)
-    OR              reduce using rule 1 (expression -> expression AND expression .)
-    $end            reduce using rule 1 (expression -> expression AND expression .)
-    RPAREN          reduce using rule 1 (expression -> expression AND expression .)
-    UNTIL           shift and go to state 9
-
-  ! UNTIL           [ reduce using rule 1 (expression -> expression AND expression .) ]
-  ! AND             [ shift and go to state 7 ]
-  ! OR              [ shift and go to state 8 ]
+    NEG             reduce using rule 1 (program -> program statement .)
+    GLOBAL          reduce using rule 1 (program -> program statement .)
+    FUTURE          reduce using rule 1 (program -> program statement .)
+    YESTERDAY       reduce using rule 1 (program -> program statement .)
+    ONCE            reduce using rule 1 (program -> program statement .)
+    HISTORICALLY    reduce using rule 1 (program -> program statement .)
+    LPAREN          reduce using rule 1 (program -> program statement .)
+    ATOMIC          reduce using rule 1 (program -> program statement .)
+    TRUE            reduce using rule 1 (program -> program statement .)
+    FALSE           reduce using rule 1 (program -> program statement .)
+    $end            reduce using rule 1 (program -> program statement .)
 
 
 state 15
 
-    (4) expression -> expression OR expression .
-    (1) expression -> expression . AND expression
-    (4) expression -> expression . OR expression
-    (7) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
-    (8) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (3) statement -> expression SEMI .
 
-  ! shift/reduce conflict for AND resolved as shift
-  ! shift/reduce conflict for OR resolved as shift
-  ! shift/reduce conflict for UNTIL resolved as shift
-    $end            reduce using rule 4 (expression -> expression OR expression .)
-    RPAREN          reduce using rule 4 (expression -> expression OR expression .)
-    AND             shift and go to state 7
-    OR              shift and go to state 8
-    UNTIL           shift and go to state 9
-
-  ! AND             [ reduce using rule 4 (expression -> expression OR expression .) ]
-  ! OR              [ reduce using rule 4 (expression -> expression OR expression .) ]
-  ! UNTIL           [ reduce using rule 4 (expression -> expression OR expression .) ]
+    NEG             reduce using rule 3 (statement -> expression SEMI .)
+    GLOBAL          reduce using rule 3 (statement -> expression SEMI .)
+    FUTURE          reduce using rule 3 (statement -> expression SEMI .)
+    YESTERDAY       reduce using rule 3 (statement -> expression SEMI .)
+    ONCE            reduce using rule 3 (statement -> expression SEMI .)
+    HISTORICALLY    reduce using rule 3 (statement -> expression SEMI .)
+    LPAREN          reduce using rule 3 (statement -> expression SEMI .)
+    ATOMIC          reduce using rule 3 (statement -> expression SEMI .)
+    TRUE            reduce using rule 3 (statement -> expression SEMI .)
+    FALSE           reduce using rule 3 (statement -> expression SEMI .)
+    $end            reduce using rule 3 (statement -> expression SEMI .)
 
 
 state 16
 
-    (7) expression -> expression UNTIL LBRACK . NUMBER RBRACK expression
-    (8) expression -> expression UNTIL LBRACK . NUMBER COMMA NUMBER RBRACK expression
+    (4) expression -> expression AND . expression
+    (4) expression -> . expression AND expression
+    (5) expression -> . NEG expression
+    (6) expression -> . expression OR expression
+    (7) expression -> . expression EQ expression
+    (8) expression -> . expression IMPLY expression
+    (9) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
+    (10) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (11) expression -> . FUTURE LBRACK NUMBER RBRACK expression
+    (12) expression -> . FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (13) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> . expression RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> . expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (17) expression -> . YESTERDAY expression
+    (18) expression -> . expression SINCE expression
+    (19) expression -> . expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (20) expression -> . ONCE expression
+    (21) expression -> . ONCE LBRACK NUMBER RBRACK expression
+    (22) expression -> . ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (23) expression -> . HISTORICALLY expression
+    (24) expression -> . HISTORICALLY LBRACK NUMBER RBRACK expression
+    (25) expression -> . HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> . LPAREN expression RPAREN
+    (27) expression -> . ATOMIC
+    (28) expression -> . TRUE
+    (29) expression -> . FALSE
 
-    NUMBER          shift and go to state 19
+    NEG             shift and go to state 4
+    GLOBAL          shift and go to state 5
+    FUTURE          shift and go to state 6
+    YESTERDAY       shift and go to state 7
+    ONCE            shift and go to state 8
+    HISTORICALLY    shift and go to state 9
+    LPAREN          shift and go to state 10
+    ATOMIC          shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
 
+    expression                     shift and go to state 32
 
 state 17
 
-    (5) expression -> GLOBAL LBRACK NUMBER . RBRACK expression
-    (6) expression -> GLOBAL LBRACK NUMBER . COMMA NUMBER RBRACK expression
+    (6) expression -> expression OR . expression
+    (4) expression -> . expression AND expression
+    (5) expression -> . NEG expression
+    (6) expression -> . expression OR expression
+    (7) expression -> . expression EQ expression
+    (8) expression -> . expression IMPLY expression
+    (9) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
+    (10) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (11) expression -> . FUTURE LBRACK NUMBER RBRACK expression
+    (12) expression -> . FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (13) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> . expression RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> . expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (17) expression -> . YESTERDAY expression
+    (18) expression -> . expression SINCE expression
+    (19) expression -> . expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (20) expression -> . ONCE expression
+    (21) expression -> . ONCE LBRACK NUMBER RBRACK expression
+    (22) expression -> . ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (23) expression -> . HISTORICALLY expression
+    (24) expression -> . HISTORICALLY LBRACK NUMBER RBRACK expression
+    (25) expression -> . HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> . LPAREN expression RPAREN
+    (27) expression -> . ATOMIC
+    (28) expression -> . TRUE
+    (29) expression -> . FALSE
 
-    RBRACK          shift and go to state 20
-    COMMA           shift and go to state 21
+    NEG             shift and go to state 4
+    GLOBAL          shift and go to state 5
+    FUTURE          shift and go to state 6
+    YESTERDAY       shift and go to state 7
+    ONCE            shift and go to state 8
+    HISTORICALLY    shift and go to state 9
+    LPAREN          shift and go to state 10
+    ATOMIC          shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
 
+    expression                     shift and go to state 33
 
 state 18
 
-    (9) expression -> LPAREN expression RPAREN .
+    (7) expression -> expression EQ . expression
+    (4) expression -> . expression AND expression
+    (5) expression -> . NEG expression
+    (6) expression -> . expression OR expression
+    (7) expression -> . expression EQ expression
+    (8) expression -> . expression IMPLY expression
+    (9) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
+    (10) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (11) expression -> . FUTURE LBRACK NUMBER RBRACK expression
+    (12) expression -> . FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (13) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> . expression RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> . expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (17) expression -> . YESTERDAY expression
+    (18) expression -> . expression SINCE expression
+    (19) expression -> . expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (20) expression -> . ONCE expression
+    (21) expression -> . ONCE LBRACK NUMBER RBRACK expression
+    (22) expression -> . ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (23) expression -> . HISTORICALLY expression
+    (24) expression -> . HISTORICALLY LBRACK NUMBER RBRACK expression
+    (25) expression -> . HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> . LPAREN expression RPAREN
+    (27) expression -> . ATOMIC
+    (28) expression -> . TRUE
+    (29) expression -> . FALSE
 
-    AND             reduce using rule 9 (expression -> LPAREN expression RPAREN .)
-    OR              reduce using rule 9 (expression -> LPAREN expression RPAREN .)
-    UNTIL           reduce using rule 9 (expression -> LPAREN expression RPAREN .)
-    $end            reduce using rule 9 (expression -> LPAREN expression RPAREN .)
-    RPAREN          reduce using rule 9 (expression -> LPAREN expression RPAREN .)
+    NEG             shift and go to state 4
+    GLOBAL          shift and go to state 5
+    FUTURE          shift and go to state 6
+    YESTERDAY       shift and go to state 7
+    ONCE            shift and go to state 8
+    HISTORICALLY    shift and go to state 9
+    LPAREN          shift and go to state 10
+    ATOMIC          shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
 
+    expression                     shift and go to state 34
 
 state 19
 
-    (7) expression -> expression UNTIL LBRACK NUMBER . RBRACK expression
-    (8) expression -> expression UNTIL LBRACK NUMBER . COMMA NUMBER RBRACK expression
+    (8) expression -> expression IMPLY . expression
+    (4) expression -> . expression AND expression
+    (5) expression -> . NEG expression
+    (6) expression -> . expression OR expression
+    (7) expression -> . expression EQ expression
+    (8) expression -> . expression IMPLY expression
+    (9) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
+    (10) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (11) expression -> . FUTURE LBRACK NUMBER RBRACK expression
+    (12) expression -> . FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (13) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> . expression RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> . expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (17) expression -> . YESTERDAY expression
+    (18) expression -> . expression SINCE expression
+    (19) expression -> . expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (20) expression -> . ONCE expression
+    (21) expression -> . ONCE LBRACK NUMBER RBRACK expression
+    (22) expression -> . ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (23) expression -> . HISTORICALLY expression
+    (24) expression -> . HISTORICALLY LBRACK NUMBER RBRACK expression
+    (25) expression -> . HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> . LPAREN expression RPAREN
+    (27) expression -> . ATOMIC
+    (28) expression -> . TRUE
+    (29) expression -> . FALSE
 
-    RBRACK          shift and go to state 22
-    COMMA           shift and go to state 23
+    NEG             shift and go to state 4
+    GLOBAL          shift and go to state 5
+    FUTURE          shift and go to state 6
+    YESTERDAY       shift and go to state 7
+    ONCE            shift and go to state 8
+    HISTORICALLY    shift and go to state 9
+    LPAREN          shift and go to state 10
+    ATOMIC          shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
 
+    expression                     shift and go to state 35
 
 state 20
 
-    (5) expression -> GLOBAL LBRACK NUMBER RBRACK . expression
-    (1) expression -> . expression AND expression
-    (2) expression -> . NEG expression
-    (3) expression -> . NEXT expression
-    (4) expression -> . expression OR expression
-    (5) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
-    (6) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
-    (7) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
-    (8) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
-    (9) expression -> . LPAREN expression RPAREN
-    (10) expression -> . ATOMIC
+    (13) expression -> expression UNTIL . LBRACK NUMBER RBRACK expression
+    (14) expression -> expression UNTIL . LBRACK NUMBER COMMA NUMBER RBRACK expression
 
-    NEG             shift and go to state 2
-    NEXT            shift and go to state 3
-    GLOBAL          shift and go to state 4
-    LPAREN          shift and go to state 5
-    ATOMIC          shift and go to state 6
+    LBRACK          shift and go to state 36
 
-    expression                     shift and go to state 24
 
 state 21
 
-    (6) expression -> GLOBAL LBRACK NUMBER COMMA . NUMBER RBRACK expression
+    (15) expression -> expression RELEASE . LBRACK NUMBER RBRACK expression
+    (16) expression -> expression RELEASE . LBRACK NUMBER COMMA NUMBER RBRACK expression
 
-    NUMBER          shift and go to state 25
+    LBRACK          shift and go to state 37
 
 
 state 22
 
-    (7) expression -> expression UNTIL LBRACK NUMBER RBRACK . expression
-    (1) expression -> . expression AND expression
-    (2) expression -> . NEG expression
-    (3) expression -> . NEXT expression
-    (4) expression -> . expression OR expression
-    (5) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
-    (6) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
-    (7) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
-    (8) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
-    (9) expression -> . LPAREN expression RPAREN
-    (10) expression -> . ATOMIC
+    (18) expression -> expression SINCE . expression
+    (19) expression -> expression SINCE . LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (4) expression -> . expression AND expression
+    (5) expression -> . NEG expression
+    (6) expression -> . expression OR expression
+    (7) expression -> . expression EQ expression
+    (8) expression -> . expression IMPLY expression
+    (9) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
+    (10) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (11) expression -> . FUTURE LBRACK NUMBER RBRACK expression
+    (12) expression -> . FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (13) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> . expression RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> . expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (17) expression -> . YESTERDAY expression
+    (18) expression -> . expression SINCE expression
+    (19) expression -> . expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (20) expression -> . ONCE expression
+    (21) expression -> . ONCE LBRACK NUMBER RBRACK expression
+    (22) expression -> . ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (23) expression -> . HISTORICALLY expression
+    (24) expression -> . HISTORICALLY LBRACK NUMBER RBRACK expression
+    (25) expression -> . HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> . LPAREN expression RPAREN
+    (27) expression -> . ATOMIC
+    (28) expression -> . TRUE
+    (29) expression -> . FALSE
 
-    NEG             shift and go to state 2
-    NEXT            shift and go to state 3
-    GLOBAL          shift and go to state 4
-    LPAREN          shift and go to state 5
-    ATOMIC          shift and go to state 6
+    LBRACK          shift and go to state 39
+    NEG             shift and go to state 4
+    GLOBAL          shift and go to state 5
+    FUTURE          shift and go to state 6
+    YESTERDAY       shift and go to state 7
+    ONCE            shift and go to state 8
+    HISTORICALLY    shift and go to state 9
+    LPAREN          shift and go to state 10
+    ATOMIC          shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
 
-    expression                     shift and go to state 26
+    expression                     shift and go to state 38
 
 state 23
 
-    (8) expression -> expression UNTIL LBRACK NUMBER COMMA . NUMBER RBRACK expression
+    (5) expression -> NEG expression .
+    (4) expression -> expression . AND expression
+    (6) expression -> expression . OR expression
+    (7) expression -> expression . EQ expression
+    (8) expression -> expression . IMPLY expression
+    (13) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> expression . RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> expression . RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (18) expression -> expression . SINCE expression
+    (19) expression -> expression . SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
 
-    NUMBER          shift and go to state 27
+    SEMI            reduce using rule 5 (expression -> NEG expression .)
+    AND             reduce using rule 5 (expression -> NEG expression .)
+    OR              reduce using rule 5 (expression -> NEG expression .)
+    EQ              reduce using rule 5 (expression -> NEG expression .)
+    IMPLY           reduce using rule 5 (expression -> NEG expression .)
+    UNTIL           reduce using rule 5 (expression -> NEG expression .)
+    RELEASE         reduce using rule 5 (expression -> NEG expression .)
+    SINCE           reduce using rule 5 (expression -> NEG expression .)
+    RPAREN          reduce using rule 5 (expression -> NEG expression .)
+
+  ! AND             [ shift and go to state 16 ]
+  ! OR              [ shift and go to state 17 ]
+  ! EQ              [ shift and go to state 18 ]
+  ! IMPLY           [ shift and go to state 19 ]
+  ! UNTIL           [ shift and go to state 20 ]
+  ! RELEASE         [ shift and go to state 21 ]
+  ! SINCE           [ shift and go to state 22 ]
 
 
 state 24
 
-    (5) expression -> GLOBAL LBRACK NUMBER RBRACK expression .
-    (1) expression -> expression . AND expression
-    (4) expression -> expression . OR expression
-    (7) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
-    (8) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (9) expression -> GLOBAL LBRACK . NUMBER RBRACK expression
+    (10) expression -> GLOBAL LBRACK . NUMBER COMMA NUMBER RBRACK expression
 
-    AND             reduce using rule 5 (expression -> GLOBAL LBRACK NUMBER RBRACK expression .)
-    OR              reduce using rule 5 (expression -> GLOBAL LBRACK NUMBER RBRACK expression .)
-    UNTIL           reduce using rule 5 (expression -> GLOBAL LBRACK NUMBER RBRACK expression .)
-    $end            reduce using rule 5 (expression -> GLOBAL LBRACK NUMBER RBRACK expression .)
-    RPAREN          reduce using rule 5 (expression -> GLOBAL LBRACK NUMBER RBRACK expression .)
-
-  ! AND             [ shift and go to state 7 ]
-  ! OR              [ shift and go to state 8 ]
-  ! UNTIL           [ shift and go to state 9 ]
+    NUMBER          shift and go to state 40
 
 
 state 25
 
-    (6) expression -> GLOBAL LBRACK NUMBER COMMA NUMBER . RBRACK expression
+    (11) expression -> FUTURE LBRACK . NUMBER RBRACK expression
+    (12) expression -> FUTURE LBRACK . NUMBER COMMA NUMBER RBRACK expression
 
-    RBRACK          shift and go to state 28
+    NUMBER          shift and go to state 41
 
 
 state 26
 
-    (7) expression -> expression UNTIL LBRACK NUMBER RBRACK expression .
-    (1) expression -> expression . AND expression
-    (4) expression -> expression . OR expression
-    (7) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
-    (8) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (17) expression -> YESTERDAY expression .
+    (4) expression -> expression . AND expression
+    (6) expression -> expression . OR expression
+    (7) expression -> expression . EQ expression
+    (8) expression -> expression . IMPLY expression
+    (13) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> expression . RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> expression . RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (18) expression -> expression . SINCE expression
+    (19) expression -> expression . SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
 
-    AND             reduce using rule 7 (expression -> expression UNTIL LBRACK NUMBER RBRACK expression .)
-    OR              reduce using rule 7 (expression -> expression UNTIL LBRACK NUMBER RBRACK expression .)
-    UNTIL           reduce using rule 7 (expression -> expression UNTIL LBRACK NUMBER RBRACK expression .)
-    $end            reduce using rule 7 (expression -> expression UNTIL LBRACK NUMBER RBRACK expression .)
-    RPAREN          reduce using rule 7 (expression -> expression UNTIL LBRACK NUMBER RBRACK expression .)
+    SEMI            reduce using rule 17 (expression -> YESTERDAY expression .)
+    AND             reduce using rule 17 (expression -> YESTERDAY expression .)
+    OR              reduce using rule 17 (expression -> YESTERDAY expression .)
+    EQ              reduce using rule 17 (expression -> YESTERDAY expression .)
+    IMPLY           reduce using rule 17 (expression -> YESTERDAY expression .)
+    UNTIL           reduce using rule 17 (expression -> YESTERDAY expression .)
+    RELEASE         reduce using rule 17 (expression -> YESTERDAY expression .)
+    SINCE           reduce using rule 17 (expression -> YESTERDAY expression .)
+    RPAREN          reduce using rule 17 (expression -> YESTERDAY expression .)
 
-  ! AND             [ shift and go to state 7 ]
-  ! OR              [ shift and go to state 8 ]
-  ! UNTIL           [ shift and go to state 9 ]
+  ! AND             [ shift and go to state 16 ]
+  ! OR              [ shift and go to state 17 ]
+  ! EQ              [ shift and go to state 18 ]
+  ! IMPLY           [ shift and go to state 19 ]
+  ! UNTIL           [ shift and go to state 20 ]
+  ! RELEASE         [ shift and go to state 21 ]
+  ! SINCE           [ shift and go to state 22 ]
 
 
 state 27
 
-    (8) expression -> expression UNTIL LBRACK NUMBER COMMA NUMBER . RBRACK expression
+    (20) expression -> ONCE expression .
+    (4) expression -> expression . AND expression
+    (6) expression -> expression . OR expression
+    (7) expression -> expression . EQ expression
+    (8) expression -> expression . IMPLY expression
+    (13) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> expression . RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> expression . RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (18) expression -> expression . SINCE expression
+    (19) expression -> expression . SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
 
-    RBRACK          shift and go to state 29
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for IMPLY resolved as shift
+  ! shift/reduce conflict for UNTIL resolved as shift
+  ! shift/reduce conflict for RELEASE resolved as shift
+  ! shift/reduce conflict for SINCE resolved as shift
+    SEMI            reduce using rule 20 (expression -> ONCE expression .)
+    RPAREN          reduce using rule 20 (expression -> ONCE expression .)
+    AND             shift and go to state 16
+    OR              shift and go to state 17
+    EQ              shift and go to state 18
+    IMPLY           shift and go to state 19
+    UNTIL           shift and go to state 20
+    RELEASE         shift and go to state 21
+    SINCE           shift and go to state 22
+
+  ! AND             [ reduce using rule 20 (expression -> ONCE expression .) ]
+  ! OR              [ reduce using rule 20 (expression -> ONCE expression .) ]
+  ! EQ              [ reduce using rule 20 (expression -> ONCE expression .) ]
+  ! IMPLY           [ reduce using rule 20 (expression -> ONCE expression .) ]
+  ! UNTIL           [ reduce using rule 20 (expression -> ONCE expression .) ]
+  ! RELEASE         [ reduce using rule 20 (expression -> ONCE expression .) ]
+  ! SINCE           [ reduce using rule 20 (expression -> ONCE expression .) ]
 
 
 state 28
 
-    (6) expression -> GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK . expression
-    (1) expression -> . expression AND expression
-    (2) expression -> . NEG expression
-    (3) expression -> . NEXT expression
-    (4) expression -> . expression OR expression
-    (5) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
-    (6) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
-    (7) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
-    (8) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
-    (9) expression -> . LPAREN expression RPAREN
-    (10) expression -> . ATOMIC
+    (21) expression -> ONCE LBRACK . NUMBER RBRACK expression
+    (22) expression -> ONCE LBRACK . NUMBER COMMA NUMBER RBRACK expression
 
-    NEG             shift and go to state 2
-    NEXT            shift and go to state 3
-    GLOBAL          shift and go to state 4
-    LPAREN          shift and go to state 5
-    ATOMIC          shift and go to state 6
+    NUMBER          shift and go to state 42
 
-    expression                     shift and go to state 30
 
 state 29
 
-    (8) expression -> expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK . expression
-    (1) expression -> . expression AND expression
-    (2) expression -> . NEG expression
-    (3) expression -> . NEXT expression
-    (4) expression -> . expression OR expression
-    (5) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
-    (6) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
-    (7) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
-    (8) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
-    (9) expression -> . LPAREN expression RPAREN
-    (10) expression -> . ATOMIC
+    (23) expression -> HISTORICALLY expression .
+    (4) expression -> expression . AND expression
+    (6) expression -> expression . OR expression
+    (7) expression -> expression . EQ expression
+    (8) expression -> expression . IMPLY expression
+    (13) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> expression . RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> expression . RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (18) expression -> expression . SINCE expression
+    (19) expression -> expression . SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
 
-    NEG             shift and go to state 2
-    NEXT            shift and go to state 3
-    GLOBAL          shift and go to state 4
-    LPAREN          shift and go to state 5
-    ATOMIC          shift and go to state 6
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for IMPLY resolved as shift
+  ! shift/reduce conflict for UNTIL resolved as shift
+  ! shift/reduce conflict for RELEASE resolved as shift
+  ! shift/reduce conflict for SINCE resolved as shift
+    SEMI            reduce using rule 23 (expression -> HISTORICALLY expression .)
+    RPAREN          reduce using rule 23 (expression -> HISTORICALLY expression .)
+    AND             shift and go to state 16
+    OR              shift and go to state 17
+    EQ              shift and go to state 18
+    IMPLY           shift and go to state 19
+    UNTIL           shift and go to state 20
+    RELEASE         shift and go to state 21
+    SINCE           shift and go to state 22
 
-    expression                     shift and go to state 31
+  ! AND             [ reduce using rule 23 (expression -> HISTORICALLY expression .) ]
+  ! OR              [ reduce using rule 23 (expression -> HISTORICALLY expression .) ]
+  ! EQ              [ reduce using rule 23 (expression -> HISTORICALLY expression .) ]
+  ! IMPLY           [ reduce using rule 23 (expression -> HISTORICALLY expression .) ]
+  ! UNTIL           [ reduce using rule 23 (expression -> HISTORICALLY expression .) ]
+  ! RELEASE         [ reduce using rule 23 (expression -> HISTORICALLY expression .) ]
+  ! SINCE           [ reduce using rule 23 (expression -> HISTORICALLY expression .) ]
+
 
 state 30
 
-    (6) expression -> GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression .
-    (1) expression -> expression . AND expression
-    (4) expression -> expression . OR expression
-    (7) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
-    (8) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (24) expression -> HISTORICALLY LBRACK . NUMBER RBRACK expression
+    (25) expression -> HISTORICALLY LBRACK . NUMBER COMMA NUMBER RBRACK expression
 
-    AND             reduce using rule 6 (expression -> GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
-    OR              reduce using rule 6 (expression -> GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
-    UNTIL           reduce using rule 6 (expression -> GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
-    $end            reduce using rule 6 (expression -> GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
-    RPAREN          reduce using rule 6 (expression -> GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
-
-  ! AND             [ shift and go to state 7 ]
-  ! OR              [ shift and go to state 8 ]
-  ! UNTIL           [ shift and go to state 9 ]
+    NUMBER          shift and go to state 43
 
 
 state 31
 
-    (8) expression -> expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression .
-    (1) expression -> expression . AND expression
-    (4) expression -> expression . OR expression
-    (7) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
-    (8) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> LPAREN expression . RPAREN
+    (4) expression -> expression . AND expression
+    (6) expression -> expression . OR expression
+    (7) expression -> expression . EQ expression
+    (8) expression -> expression . IMPLY expression
+    (13) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> expression . RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> expression . RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (18) expression -> expression . SINCE expression
+    (19) expression -> expression . SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
 
-    AND             reduce using rule 8 (expression -> expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
-    OR              reduce using rule 8 (expression -> expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
-    UNTIL           reduce using rule 8 (expression -> expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
-    $end            reduce using rule 8 (expression -> expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
-    RPAREN          reduce using rule 8 (expression -> expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    RPAREN          shift and go to state 44
+    AND             shift and go to state 16
+    OR              shift and go to state 17
+    EQ              shift and go to state 18
+    IMPLY           shift and go to state 19
+    UNTIL           shift and go to state 20
+    RELEASE         shift and go to state 21
+    SINCE           shift and go to state 22
 
-  ! AND             [ shift and go to state 7 ]
-  ! OR              [ shift and go to state 8 ]
-  ! UNTIL           [ shift and go to state 9 ]
+
+state 32
+
+    (4) expression -> expression AND expression .
+    (4) expression -> expression . AND expression
+    (6) expression -> expression . OR expression
+    (7) expression -> expression . EQ expression
+    (8) expression -> expression . IMPLY expression
+    (13) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> expression . RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> expression . RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (18) expression -> expression . SINCE expression
+    (19) expression -> expression . SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+
+    SEMI            reduce using rule 4 (expression -> expression AND expression .)
+    AND             reduce using rule 4 (expression -> expression AND expression .)
+    OR              reduce using rule 4 (expression -> expression AND expression .)
+    EQ              reduce using rule 4 (expression -> expression AND expression .)
+    IMPLY           reduce using rule 4 (expression -> expression AND expression .)
+    RPAREN          reduce using rule 4 (expression -> expression AND expression .)
+    UNTIL           shift and go to state 20
+    RELEASE         shift and go to state 21
+    SINCE           shift and go to state 22
+
+  ! UNTIL           [ reduce using rule 4 (expression -> expression AND expression .) ]
+  ! RELEASE         [ reduce using rule 4 (expression -> expression AND expression .) ]
+  ! SINCE           [ reduce using rule 4 (expression -> expression AND expression .) ]
+  ! AND             [ shift and go to state 16 ]
+  ! OR              [ shift and go to state 17 ]
+  ! EQ              [ shift and go to state 18 ]
+  ! IMPLY           [ shift and go to state 19 ]
+
+
+state 33
+
+    (6) expression -> expression OR expression .
+    (4) expression -> expression . AND expression
+    (6) expression -> expression . OR expression
+    (7) expression -> expression . EQ expression
+    (8) expression -> expression . IMPLY expression
+    (13) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> expression . RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> expression . RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (18) expression -> expression . SINCE expression
+    (19) expression -> expression . SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+
+    SEMI            reduce using rule 6 (expression -> expression OR expression .)
+    AND             reduce using rule 6 (expression -> expression OR expression .)
+    OR              reduce using rule 6 (expression -> expression OR expression .)
+    EQ              reduce using rule 6 (expression -> expression OR expression .)
+    IMPLY           reduce using rule 6 (expression -> expression OR expression .)
+    RPAREN          reduce using rule 6 (expression -> expression OR expression .)
+    UNTIL           shift and go to state 20
+    RELEASE         shift and go to state 21
+    SINCE           shift and go to state 22
+
+  ! UNTIL           [ reduce using rule 6 (expression -> expression OR expression .) ]
+  ! RELEASE         [ reduce using rule 6 (expression -> expression OR expression .) ]
+  ! SINCE           [ reduce using rule 6 (expression -> expression OR expression .) ]
+  ! AND             [ shift and go to state 16 ]
+  ! OR              [ shift and go to state 17 ]
+  ! EQ              [ shift and go to state 18 ]
+  ! IMPLY           [ shift and go to state 19 ]
+
+
+state 34
+
+    (7) expression -> expression EQ expression .
+    (4) expression -> expression . AND expression
+    (6) expression -> expression . OR expression
+    (7) expression -> expression . EQ expression
+    (8) expression -> expression . IMPLY expression
+    (13) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> expression . RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> expression . RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (18) expression -> expression . SINCE expression
+    (19) expression -> expression . SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+
+    SEMI            reduce using rule 7 (expression -> expression EQ expression .)
+    AND             reduce using rule 7 (expression -> expression EQ expression .)
+    OR              reduce using rule 7 (expression -> expression EQ expression .)
+    EQ              reduce using rule 7 (expression -> expression EQ expression .)
+    IMPLY           reduce using rule 7 (expression -> expression EQ expression .)
+    RPAREN          reduce using rule 7 (expression -> expression EQ expression .)
+    UNTIL           shift and go to state 20
+    RELEASE         shift and go to state 21
+    SINCE           shift and go to state 22
+
+  ! UNTIL           [ reduce using rule 7 (expression -> expression EQ expression .) ]
+  ! RELEASE         [ reduce using rule 7 (expression -> expression EQ expression .) ]
+  ! SINCE           [ reduce using rule 7 (expression -> expression EQ expression .) ]
+  ! AND             [ shift and go to state 16 ]
+  ! OR              [ shift and go to state 17 ]
+  ! EQ              [ shift and go to state 18 ]
+  ! IMPLY           [ shift and go to state 19 ]
+
+
+state 35
+
+    (8) expression -> expression IMPLY expression .
+    (4) expression -> expression . AND expression
+    (6) expression -> expression . OR expression
+    (7) expression -> expression . EQ expression
+    (8) expression -> expression . IMPLY expression
+    (13) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> expression . RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> expression . RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (18) expression -> expression . SINCE expression
+    (19) expression -> expression . SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+
+    SEMI            reduce using rule 8 (expression -> expression IMPLY expression .)
+    AND             reduce using rule 8 (expression -> expression IMPLY expression .)
+    OR              reduce using rule 8 (expression -> expression IMPLY expression .)
+    EQ              reduce using rule 8 (expression -> expression IMPLY expression .)
+    IMPLY           reduce using rule 8 (expression -> expression IMPLY expression .)
+    RPAREN          reduce using rule 8 (expression -> expression IMPLY expression .)
+    UNTIL           shift and go to state 20
+    RELEASE         shift and go to state 21
+    SINCE           shift and go to state 22
+
+  ! UNTIL           [ reduce using rule 8 (expression -> expression IMPLY expression .) ]
+  ! RELEASE         [ reduce using rule 8 (expression -> expression IMPLY expression .) ]
+  ! SINCE           [ reduce using rule 8 (expression -> expression IMPLY expression .) ]
+  ! AND             [ shift and go to state 16 ]
+  ! OR              [ shift and go to state 17 ]
+  ! EQ              [ shift and go to state 18 ]
+  ! IMPLY           [ shift and go to state 19 ]
+
+
+state 36
+
+    (13) expression -> expression UNTIL LBRACK . NUMBER RBRACK expression
+    (14) expression -> expression UNTIL LBRACK . NUMBER COMMA NUMBER RBRACK expression
+
+    NUMBER          shift and go to state 45
+
+
+state 37
+
+    (15) expression -> expression RELEASE LBRACK . NUMBER RBRACK expression
+    (16) expression -> expression RELEASE LBRACK . NUMBER COMMA NUMBER RBRACK expression
+
+    NUMBER          shift and go to state 46
+
+
+state 38
+
+    (18) expression -> expression SINCE expression .
+    (4) expression -> expression . AND expression
+    (6) expression -> expression . OR expression
+    (7) expression -> expression . EQ expression
+    (8) expression -> expression . IMPLY expression
+    (13) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> expression . RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> expression . RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (18) expression -> expression . SINCE expression
+    (19) expression -> expression . SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+
+    SEMI            reduce using rule 18 (expression -> expression SINCE expression .)
+    AND             reduce using rule 18 (expression -> expression SINCE expression .)
+    OR              reduce using rule 18 (expression -> expression SINCE expression .)
+    EQ              reduce using rule 18 (expression -> expression SINCE expression .)
+    IMPLY           reduce using rule 18 (expression -> expression SINCE expression .)
+    UNTIL           reduce using rule 18 (expression -> expression SINCE expression .)
+    RELEASE         reduce using rule 18 (expression -> expression SINCE expression .)
+    SINCE           reduce using rule 18 (expression -> expression SINCE expression .)
+    RPAREN          reduce using rule 18 (expression -> expression SINCE expression .)
+
+  ! AND             [ shift and go to state 16 ]
+  ! OR              [ shift and go to state 17 ]
+  ! EQ              [ shift and go to state 18 ]
+  ! IMPLY           [ shift and go to state 19 ]
+  ! UNTIL           [ shift and go to state 20 ]
+  ! RELEASE         [ shift and go to state 21 ]
+  ! SINCE           [ shift and go to state 22 ]
+
+
+state 39
+
+    (19) expression -> expression SINCE LBRACK . NUMBER COMMA NUMBER RBRACK expression
+
+    NUMBER          shift and go to state 47
+
+
+state 40
+
+    (9) expression -> GLOBAL LBRACK NUMBER . RBRACK expression
+    (10) expression -> GLOBAL LBRACK NUMBER . COMMA NUMBER RBRACK expression
+
+    RBRACK          shift and go to state 48
+    COMMA           shift and go to state 49
+
+
+state 41
+
+    (11) expression -> FUTURE LBRACK NUMBER . RBRACK expression
+    (12) expression -> FUTURE LBRACK NUMBER . COMMA NUMBER RBRACK expression
+
+    RBRACK          shift and go to state 50
+    COMMA           shift and go to state 51
+
+
+state 42
+
+    (21) expression -> ONCE LBRACK NUMBER . RBRACK expression
+    (22) expression -> ONCE LBRACK NUMBER . COMMA NUMBER RBRACK expression
+
+    RBRACK          shift and go to state 52
+    COMMA           shift and go to state 53
+
+
+state 43
+
+    (24) expression -> HISTORICALLY LBRACK NUMBER . RBRACK expression
+    (25) expression -> HISTORICALLY LBRACK NUMBER . COMMA NUMBER RBRACK expression
+
+    RBRACK          shift and go to state 54
+    COMMA           shift and go to state 55
+
+
+state 44
+
+    (26) expression -> LPAREN expression RPAREN .
+
+    SEMI            reduce using rule 26 (expression -> LPAREN expression RPAREN .)
+    AND             reduce using rule 26 (expression -> LPAREN expression RPAREN .)
+    OR              reduce using rule 26 (expression -> LPAREN expression RPAREN .)
+    EQ              reduce using rule 26 (expression -> LPAREN expression RPAREN .)
+    IMPLY           reduce using rule 26 (expression -> LPAREN expression RPAREN .)
+    UNTIL           reduce using rule 26 (expression -> LPAREN expression RPAREN .)
+    RELEASE         reduce using rule 26 (expression -> LPAREN expression RPAREN .)
+    SINCE           reduce using rule 26 (expression -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 26 (expression -> LPAREN expression RPAREN .)
+
+
+state 45
+
+    (13) expression -> expression UNTIL LBRACK NUMBER . RBRACK expression
+    (14) expression -> expression UNTIL LBRACK NUMBER . COMMA NUMBER RBRACK expression
+
+    RBRACK          shift and go to state 56
+    COMMA           shift and go to state 57
+
+
+state 46
+
+    (15) expression -> expression RELEASE LBRACK NUMBER . RBRACK expression
+    (16) expression -> expression RELEASE LBRACK NUMBER . COMMA NUMBER RBRACK expression
+
+    RBRACK          shift and go to state 58
+    COMMA           shift and go to state 59
+
+
+state 47
+
+    (19) expression -> expression SINCE LBRACK NUMBER . COMMA NUMBER RBRACK expression
+
+    COMMA           shift and go to state 60
+
+
+state 48
+
+    (9) expression -> GLOBAL LBRACK NUMBER RBRACK . expression
+    (4) expression -> . expression AND expression
+    (5) expression -> . NEG expression
+    (6) expression -> . expression OR expression
+    (7) expression -> . expression EQ expression
+    (8) expression -> . expression IMPLY expression
+    (9) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
+    (10) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (11) expression -> . FUTURE LBRACK NUMBER RBRACK expression
+    (12) expression -> . FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (13) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> . expression RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> . expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (17) expression -> . YESTERDAY expression
+    (18) expression -> . expression SINCE expression
+    (19) expression -> . expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (20) expression -> . ONCE expression
+    (21) expression -> . ONCE LBRACK NUMBER RBRACK expression
+    (22) expression -> . ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (23) expression -> . HISTORICALLY expression
+    (24) expression -> . HISTORICALLY LBRACK NUMBER RBRACK expression
+    (25) expression -> . HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> . LPAREN expression RPAREN
+    (27) expression -> . ATOMIC
+    (28) expression -> . TRUE
+    (29) expression -> . FALSE
+
+    NEG             shift and go to state 4
+    GLOBAL          shift and go to state 5
+    FUTURE          shift and go to state 6
+    YESTERDAY       shift and go to state 7
+    ONCE            shift and go to state 8
+    HISTORICALLY    shift and go to state 9
+    LPAREN          shift and go to state 10
+    ATOMIC          shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
+
+    expression                     shift and go to state 61
+
+state 49
+
+    (10) expression -> GLOBAL LBRACK NUMBER COMMA . NUMBER RBRACK expression
+
+    NUMBER          shift and go to state 62
+
+
+state 50
+
+    (11) expression -> FUTURE LBRACK NUMBER RBRACK . expression
+    (4) expression -> . expression AND expression
+    (5) expression -> . NEG expression
+    (6) expression -> . expression OR expression
+    (7) expression -> . expression EQ expression
+    (8) expression -> . expression IMPLY expression
+    (9) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
+    (10) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (11) expression -> . FUTURE LBRACK NUMBER RBRACK expression
+    (12) expression -> . FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (13) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> . expression RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> . expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (17) expression -> . YESTERDAY expression
+    (18) expression -> . expression SINCE expression
+    (19) expression -> . expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (20) expression -> . ONCE expression
+    (21) expression -> . ONCE LBRACK NUMBER RBRACK expression
+    (22) expression -> . ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (23) expression -> . HISTORICALLY expression
+    (24) expression -> . HISTORICALLY LBRACK NUMBER RBRACK expression
+    (25) expression -> . HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> . LPAREN expression RPAREN
+    (27) expression -> . ATOMIC
+    (28) expression -> . TRUE
+    (29) expression -> . FALSE
+
+    NEG             shift and go to state 4
+    GLOBAL          shift and go to state 5
+    FUTURE          shift and go to state 6
+    YESTERDAY       shift and go to state 7
+    ONCE            shift and go to state 8
+    HISTORICALLY    shift and go to state 9
+    LPAREN          shift and go to state 10
+    ATOMIC          shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
+
+    expression                     shift and go to state 63
+
+state 51
+
+    (12) expression -> FUTURE LBRACK NUMBER COMMA . NUMBER RBRACK expression
+
+    NUMBER          shift and go to state 64
+
+
+state 52
+
+    (21) expression -> ONCE LBRACK NUMBER RBRACK . expression
+    (4) expression -> . expression AND expression
+    (5) expression -> . NEG expression
+    (6) expression -> . expression OR expression
+    (7) expression -> . expression EQ expression
+    (8) expression -> . expression IMPLY expression
+    (9) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
+    (10) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (11) expression -> . FUTURE LBRACK NUMBER RBRACK expression
+    (12) expression -> . FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (13) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> . expression RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> . expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (17) expression -> . YESTERDAY expression
+    (18) expression -> . expression SINCE expression
+    (19) expression -> . expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (20) expression -> . ONCE expression
+    (21) expression -> . ONCE LBRACK NUMBER RBRACK expression
+    (22) expression -> . ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (23) expression -> . HISTORICALLY expression
+    (24) expression -> . HISTORICALLY LBRACK NUMBER RBRACK expression
+    (25) expression -> . HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> . LPAREN expression RPAREN
+    (27) expression -> . ATOMIC
+    (28) expression -> . TRUE
+    (29) expression -> . FALSE
+
+    NEG             shift and go to state 4
+    GLOBAL          shift and go to state 5
+    FUTURE          shift and go to state 6
+    YESTERDAY       shift and go to state 7
+    ONCE            shift and go to state 8
+    HISTORICALLY    shift and go to state 9
+    LPAREN          shift and go to state 10
+    ATOMIC          shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
+
+    expression                     shift and go to state 65
+
+state 53
+
+    (22) expression -> ONCE LBRACK NUMBER COMMA . NUMBER RBRACK expression
+
+    NUMBER          shift and go to state 66
+
+
+state 54
+
+    (24) expression -> HISTORICALLY LBRACK NUMBER RBRACK . expression
+    (4) expression -> . expression AND expression
+    (5) expression -> . NEG expression
+    (6) expression -> . expression OR expression
+    (7) expression -> . expression EQ expression
+    (8) expression -> . expression IMPLY expression
+    (9) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
+    (10) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (11) expression -> . FUTURE LBRACK NUMBER RBRACK expression
+    (12) expression -> . FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (13) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> . expression RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> . expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (17) expression -> . YESTERDAY expression
+    (18) expression -> . expression SINCE expression
+    (19) expression -> . expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (20) expression -> . ONCE expression
+    (21) expression -> . ONCE LBRACK NUMBER RBRACK expression
+    (22) expression -> . ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (23) expression -> . HISTORICALLY expression
+    (24) expression -> . HISTORICALLY LBRACK NUMBER RBRACK expression
+    (25) expression -> . HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> . LPAREN expression RPAREN
+    (27) expression -> . ATOMIC
+    (28) expression -> . TRUE
+    (29) expression -> . FALSE
+
+    NEG             shift and go to state 4
+    GLOBAL          shift and go to state 5
+    FUTURE          shift and go to state 6
+    YESTERDAY       shift and go to state 7
+    ONCE            shift and go to state 8
+    HISTORICALLY    shift and go to state 9
+    LPAREN          shift and go to state 10
+    ATOMIC          shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
+
+    expression                     shift and go to state 67
+
+state 55
+
+    (25) expression -> HISTORICALLY LBRACK NUMBER COMMA . NUMBER RBRACK expression
+
+    NUMBER          shift and go to state 68
+
+
+state 56
+
+    (13) expression -> expression UNTIL LBRACK NUMBER RBRACK . expression
+    (4) expression -> . expression AND expression
+    (5) expression -> . NEG expression
+    (6) expression -> . expression OR expression
+    (7) expression -> . expression EQ expression
+    (8) expression -> . expression IMPLY expression
+    (9) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
+    (10) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (11) expression -> . FUTURE LBRACK NUMBER RBRACK expression
+    (12) expression -> . FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (13) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> . expression RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> . expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (17) expression -> . YESTERDAY expression
+    (18) expression -> . expression SINCE expression
+    (19) expression -> . expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (20) expression -> . ONCE expression
+    (21) expression -> . ONCE LBRACK NUMBER RBRACK expression
+    (22) expression -> . ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (23) expression -> . HISTORICALLY expression
+    (24) expression -> . HISTORICALLY LBRACK NUMBER RBRACK expression
+    (25) expression -> . HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> . LPAREN expression RPAREN
+    (27) expression -> . ATOMIC
+    (28) expression -> . TRUE
+    (29) expression -> . FALSE
+
+    NEG             shift and go to state 4
+    GLOBAL          shift and go to state 5
+    FUTURE          shift and go to state 6
+    YESTERDAY       shift and go to state 7
+    ONCE            shift and go to state 8
+    HISTORICALLY    shift and go to state 9
+    LPAREN          shift and go to state 10
+    ATOMIC          shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
+
+    expression                     shift and go to state 69
+
+state 57
+
+    (14) expression -> expression UNTIL LBRACK NUMBER COMMA . NUMBER RBRACK expression
+
+    NUMBER          shift and go to state 70
+
+
+state 58
+
+    (15) expression -> expression RELEASE LBRACK NUMBER RBRACK . expression
+    (4) expression -> . expression AND expression
+    (5) expression -> . NEG expression
+    (6) expression -> . expression OR expression
+    (7) expression -> . expression EQ expression
+    (8) expression -> . expression IMPLY expression
+    (9) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
+    (10) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (11) expression -> . FUTURE LBRACK NUMBER RBRACK expression
+    (12) expression -> . FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (13) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> . expression RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> . expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (17) expression -> . YESTERDAY expression
+    (18) expression -> . expression SINCE expression
+    (19) expression -> . expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (20) expression -> . ONCE expression
+    (21) expression -> . ONCE LBRACK NUMBER RBRACK expression
+    (22) expression -> . ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (23) expression -> . HISTORICALLY expression
+    (24) expression -> . HISTORICALLY LBRACK NUMBER RBRACK expression
+    (25) expression -> . HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> . LPAREN expression RPAREN
+    (27) expression -> . ATOMIC
+    (28) expression -> . TRUE
+    (29) expression -> . FALSE
+
+    NEG             shift and go to state 4
+    GLOBAL          shift and go to state 5
+    FUTURE          shift and go to state 6
+    YESTERDAY       shift and go to state 7
+    ONCE            shift and go to state 8
+    HISTORICALLY    shift and go to state 9
+    LPAREN          shift and go to state 10
+    ATOMIC          shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
+
+    expression                     shift and go to state 71
+
+state 59
+
+    (16) expression -> expression RELEASE LBRACK NUMBER COMMA . NUMBER RBRACK expression
+
+    NUMBER          shift and go to state 72
+
+
+state 60
+
+    (19) expression -> expression SINCE LBRACK NUMBER COMMA . NUMBER RBRACK expression
+
+    NUMBER          shift and go to state 73
+
+
+state 61
+
+    (9) expression -> GLOBAL LBRACK NUMBER RBRACK expression .
+    (4) expression -> expression . AND expression
+    (6) expression -> expression . OR expression
+    (7) expression -> expression . EQ expression
+    (8) expression -> expression . IMPLY expression
+    (13) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> expression . RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> expression . RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (18) expression -> expression . SINCE expression
+    (19) expression -> expression . SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+
+    SEMI            reduce using rule 9 (expression -> GLOBAL LBRACK NUMBER RBRACK expression .)
+    AND             reduce using rule 9 (expression -> GLOBAL LBRACK NUMBER RBRACK expression .)
+    OR              reduce using rule 9 (expression -> GLOBAL LBRACK NUMBER RBRACK expression .)
+    EQ              reduce using rule 9 (expression -> GLOBAL LBRACK NUMBER RBRACK expression .)
+    IMPLY           reduce using rule 9 (expression -> GLOBAL LBRACK NUMBER RBRACK expression .)
+    UNTIL           reduce using rule 9 (expression -> GLOBAL LBRACK NUMBER RBRACK expression .)
+    RELEASE         reduce using rule 9 (expression -> GLOBAL LBRACK NUMBER RBRACK expression .)
+    SINCE           reduce using rule 9 (expression -> GLOBAL LBRACK NUMBER RBRACK expression .)
+    RPAREN          reduce using rule 9 (expression -> GLOBAL LBRACK NUMBER RBRACK expression .)
+
+  ! AND             [ shift and go to state 16 ]
+  ! OR              [ shift and go to state 17 ]
+  ! EQ              [ shift and go to state 18 ]
+  ! IMPLY           [ shift and go to state 19 ]
+  ! UNTIL           [ shift and go to state 20 ]
+  ! RELEASE         [ shift and go to state 21 ]
+  ! SINCE           [ shift and go to state 22 ]
+
+
+state 62
+
+    (10) expression -> GLOBAL LBRACK NUMBER COMMA NUMBER . RBRACK expression
+
+    RBRACK          shift and go to state 74
+
+
+state 63
+
+    (11) expression -> FUTURE LBRACK NUMBER RBRACK expression .
+    (4) expression -> expression . AND expression
+    (6) expression -> expression . OR expression
+    (7) expression -> expression . EQ expression
+    (8) expression -> expression . IMPLY expression
+    (13) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> expression . RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> expression . RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (18) expression -> expression . SINCE expression
+    (19) expression -> expression . SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+
+    SEMI            reduce using rule 11 (expression -> FUTURE LBRACK NUMBER RBRACK expression .)
+    AND             reduce using rule 11 (expression -> FUTURE LBRACK NUMBER RBRACK expression .)
+    OR              reduce using rule 11 (expression -> FUTURE LBRACK NUMBER RBRACK expression .)
+    EQ              reduce using rule 11 (expression -> FUTURE LBRACK NUMBER RBRACK expression .)
+    IMPLY           reduce using rule 11 (expression -> FUTURE LBRACK NUMBER RBRACK expression .)
+    UNTIL           reduce using rule 11 (expression -> FUTURE LBRACK NUMBER RBRACK expression .)
+    RELEASE         reduce using rule 11 (expression -> FUTURE LBRACK NUMBER RBRACK expression .)
+    SINCE           reduce using rule 11 (expression -> FUTURE LBRACK NUMBER RBRACK expression .)
+    RPAREN          reduce using rule 11 (expression -> FUTURE LBRACK NUMBER RBRACK expression .)
+
+  ! AND             [ shift and go to state 16 ]
+  ! OR              [ shift and go to state 17 ]
+  ! EQ              [ shift and go to state 18 ]
+  ! IMPLY           [ shift and go to state 19 ]
+  ! UNTIL           [ shift and go to state 20 ]
+  ! RELEASE         [ shift and go to state 21 ]
+  ! SINCE           [ shift and go to state 22 ]
+
+
+state 64
+
+    (12) expression -> FUTURE LBRACK NUMBER COMMA NUMBER . RBRACK expression
+
+    RBRACK          shift and go to state 75
+
+
+state 65
+
+    (21) expression -> ONCE LBRACK NUMBER RBRACK expression .
+    (4) expression -> expression . AND expression
+    (6) expression -> expression . OR expression
+    (7) expression -> expression . EQ expression
+    (8) expression -> expression . IMPLY expression
+    (13) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> expression . RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> expression . RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (18) expression -> expression . SINCE expression
+    (19) expression -> expression . SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+
+    SEMI            reduce using rule 21 (expression -> ONCE LBRACK NUMBER RBRACK expression .)
+    AND             reduce using rule 21 (expression -> ONCE LBRACK NUMBER RBRACK expression .)
+    OR              reduce using rule 21 (expression -> ONCE LBRACK NUMBER RBRACK expression .)
+    EQ              reduce using rule 21 (expression -> ONCE LBRACK NUMBER RBRACK expression .)
+    IMPLY           reduce using rule 21 (expression -> ONCE LBRACK NUMBER RBRACK expression .)
+    UNTIL           reduce using rule 21 (expression -> ONCE LBRACK NUMBER RBRACK expression .)
+    RELEASE         reduce using rule 21 (expression -> ONCE LBRACK NUMBER RBRACK expression .)
+    SINCE           reduce using rule 21 (expression -> ONCE LBRACK NUMBER RBRACK expression .)
+    RPAREN          reduce using rule 21 (expression -> ONCE LBRACK NUMBER RBRACK expression .)
+
+  ! AND             [ shift and go to state 16 ]
+  ! OR              [ shift and go to state 17 ]
+  ! EQ              [ shift and go to state 18 ]
+  ! IMPLY           [ shift and go to state 19 ]
+  ! UNTIL           [ shift and go to state 20 ]
+  ! RELEASE         [ shift and go to state 21 ]
+  ! SINCE           [ shift and go to state 22 ]
+
+
+state 66
+
+    (22) expression -> ONCE LBRACK NUMBER COMMA NUMBER . RBRACK expression
+
+    RBRACK          shift and go to state 76
+
+
+state 67
+
+    (24) expression -> HISTORICALLY LBRACK NUMBER RBRACK expression .
+    (4) expression -> expression . AND expression
+    (6) expression -> expression . OR expression
+    (7) expression -> expression . EQ expression
+    (8) expression -> expression . IMPLY expression
+    (13) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> expression . RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> expression . RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (18) expression -> expression . SINCE expression
+    (19) expression -> expression . SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+
+    SEMI            reduce using rule 24 (expression -> HISTORICALLY LBRACK NUMBER RBRACK expression .)
+    AND             reduce using rule 24 (expression -> HISTORICALLY LBRACK NUMBER RBRACK expression .)
+    OR              reduce using rule 24 (expression -> HISTORICALLY LBRACK NUMBER RBRACK expression .)
+    EQ              reduce using rule 24 (expression -> HISTORICALLY LBRACK NUMBER RBRACK expression .)
+    IMPLY           reduce using rule 24 (expression -> HISTORICALLY LBRACK NUMBER RBRACK expression .)
+    UNTIL           reduce using rule 24 (expression -> HISTORICALLY LBRACK NUMBER RBRACK expression .)
+    RELEASE         reduce using rule 24 (expression -> HISTORICALLY LBRACK NUMBER RBRACK expression .)
+    SINCE           reduce using rule 24 (expression -> HISTORICALLY LBRACK NUMBER RBRACK expression .)
+    RPAREN          reduce using rule 24 (expression -> HISTORICALLY LBRACK NUMBER RBRACK expression .)
+
+  ! AND             [ shift and go to state 16 ]
+  ! OR              [ shift and go to state 17 ]
+  ! EQ              [ shift and go to state 18 ]
+  ! IMPLY           [ shift and go to state 19 ]
+  ! UNTIL           [ shift and go to state 20 ]
+  ! RELEASE         [ shift and go to state 21 ]
+  ! SINCE           [ shift and go to state 22 ]
+
+
+state 68
+
+    (25) expression -> HISTORICALLY LBRACK NUMBER COMMA NUMBER . RBRACK expression
+
+    RBRACK          shift and go to state 77
+
+
+state 69
+
+    (13) expression -> expression UNTIL LBRACK NUMBER RBRACK expression .
+    (4) expression -> expression . AND expression
+    (6) expression -> expression . OR expression
+    (7) expression -> expression . EQ expression
+    (8) expression -> expression . IMPLY expression
+    (13) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> expression . RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> expression . RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (18) expression -> expression . SINCE expression
+    (19) expression -> expression . SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+
+    SEMI            reduce using rule 13 (expression -> expression UNTIL LBRACK NUMBER RBRACK expression .)
+    AND             reduce using rule 13 (expression -> expression UNTIL LBRACK NUMBER RBRACK expression .)
+    OR              reduce using rule 13 (expression -> expression UNTIL LBRACK NUMBER RBRACK expression .)
+    EQ              reduce using rule 13 (expression -> expression UNTIL LBRACK NUMBER RBRACK expression .)
+    IMPLY           reduce using rule 13 (expression -> expression UNTIL LBRACK NUMBER RBRACK expression .)
+    UNTIL           reduce using rule 13 (expression -> expression UNTIL LBRACK NUMBER RBRACK expression .)
+    RELEASE         reduce using rule 13 (expression -> expression UNTIL LBRACK NUMBER RBRACK expression .)
+    SINCE           reduce using rule 13 (expression -> expression UNTIL LBRACK NUMBER RBRACK expression .)
+    RPAREN          reduce using rule 13 (expression -> expression UNTIL LBRACK NUMBER RBRACK expression .)
+
+  ! AND             [ shift and go to state 16 ]
+  ! OR              [ shift and go to state 17 ]
+  ! EQ              [ shift and go to state 18 ]
+  ! IMPLY           [ shift and go to state 19 ]
+  ! UNTIL           [ shift and go to state 20 ]
+  ! RELEASE         [ shift and go to state 21 ]
+  ! SINCE           [ shift and go to state 22 ]
+
+
+state 70
+
+    (14) expression -> expression UNTIL LBRACK NUMBER COMMA NUMBER . RBRACK expression
+
+    RBRACK          shift and go to state 78
+
+
+state 71
+
+    (15) expression -> expression RELEASE LBRACK NUMBER RBRACK expression .
+    (4) expression -> expression . AND expression
+    (6) expression -> expression . OR expression
+    (7) expression -> expression . EQ expression
+    (8) expression -> expression . IMPLY expression
+    (13) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> expression . RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> expression . RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (18) expression -> expression . SINCE expression
+    (19) expression -> expression . SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+
+    SEMI            reduce using rule 15 (expression -> expression RELEASE LBRACK NUMBER RBRACK expression .)
+    AND             reduce using rule 15 (expression -> expression RELEASE LBRACK NUMBER RBRACK expression .)
+    OR              reduce using rule 15 (expression -> expression RELEASE LBRACK NUMBER RBRACK expression .)
+    EQ              reduce using rule 15 (expression -> expression RELEASE LBRACK NUMBER RBRACK expression .)
+    IMPLY           reduce using rule 15 (expression -> expression RELEASE LBRACK NUMBER RBRACK expression .)
+    UNTIL           reduce using rule 15 (expression -> expression RELEASE LBRACK NUMBER RBRACK expression .)
+    RELEASE         reduce using rule 15 (expression -> expression RELEASE LBRACK NUMBER RBRACK expression .)
+    SINCE           reduce using rule 15 (expression -> expression RELEASE LBRACK NUMBER RBRACK expression .)
+    RPAREN          reduce using rule 15 (expression -> expression RELEASE LBRACK NUMBER RBRACK expression .)
+
+  ! AND             [ shift and go to state 16 ]
+  ! OR              [ shift and go to state 17 ]
+  ! EQ              [ shift and go to state 18 ]
+  ! IMPLY           [ shift and go to state 19 ]
+  ! UNTIL           [ shift and go to state 20 ]
+  ! RELEASE         [ shift and go to state 21 ]
+  ! SINCE           [ shift and go to state 22 ]
+
+
+state 72
+
+    (16) expression -> expression RELEASE LBRACK NUMBER COMMA NUMBER . RBRACK expression
+
+    RBRACK          shift and go to state 79
+
+
+state 73
+
+    (19) expression -> expression SINCE LBRACK NUMBER COMMA NUMBER . RBRACK expression
+
+    RBRACK          shift and go to state 80
+
+
+state 74
+
+    (10) expression -> GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK . expression
+    (4) expression -> . expression AND expression
+    (5) expression -> . NEG expression
+    (6) expression -> . expression OR expression
+    (7) expression -> . expression EQ expression
+    (8) expression -> . expression IMPLY expression
+    (9) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
+    (10) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (11) expression -> . FUTURE LBRACK NUMBER RBRACK expression
+    (12) expression -> . FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (13) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> . expression RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> . expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (17) expression -> . YESTERDAY expression
+    (18) expression -> . expression SINCE expression
+    (19) expression -> . expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (20) expression -> . ONCE expression
+    (21) expression -> . ONCE LBRACK NUMBER RBRACK expression
+    (22) expression -> . ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (23) expression -> . HISTORICALLY expression
+    (24) expression -> . HISTORICALLY LBRACK NUMBER RBRACK expression
+    (25) expression -> . HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> . LPAREN expression RPAREN
+    (27) expression -> . ATOMIC
+    (28) expression -> . TRUE
+    (29) expression -> . FALSE
+
+    NEG             shift and go to state 4
+    GLOBAL          shift and go to state 5
+    FUTURE          shift and go to state 6
+    YESTERDAY       shift and go to state 7
+    ONCE            shift and go to state 8
+    HISTORICALLY    shift and go to state 9
+    LPAREN          shift and go to state 10
+    ATOMIC          shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
+
+    expression                     shift and go to state 81
+
+state 75
+
+    (12) expression -> FUTURE LBRACK NUMBER COMMA NUMBER RBRACK . expression
+    (4) expression -> . expression AND expression
+    (5) expression -> . NEG expression
+    (6) expression -> . expression OR expression
+    (7) expression -> . expression EQ expression
+    (8) expression -> . expression IMPLY expression
+    (9) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
+    (10) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (11) expression -> . FUTURE LBRACK NUMBER RBRACK expression
+    (12) expression -> . FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (13) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> . expression RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> . expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (17) expression -> . YESTERDAY expression
+    (18) expression -> . expression SINCE expression
+    (19) expression -> . expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (20) expression -> . ONCE expression
+    (21) expression -> . ONCE LBRACK NUMBER RBRACK expression
+    (22) expression -> . ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (23) expression -> . HISTORICALLY expression
+    (24) expression -> . HISTORICALLY LBRACK NUMBER RBRACK expression
+    (25) expression -> . HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> . LPAREN expression RPAREN
+    (27) expression -> . ATOMIC
+    (28) expression -> . TRUE
+    (29) expression -> . FALSE
+
+    NEG             shift and go to state 4
+    GLOBAL          shift and go to state 5
+    FUTURE          shift and go to state 6
+    YESTERDAY       shift and go to state 7
+    ONCE            shift and go to state 8
+    HISTORICALLY    shift and go to state 9
+    LPAREN          shift and go to state 10
+    ATOMIC          shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
+
+    expression                     shift and go to state 82
+
+state 76
+
+    (22) expression -> ONCE LBRACK NUMBER COMMA NUMBER RBRACK . expression
+    (4) expression -> . expression AND expression
+    (5) expression -> . NEG expression
+    (6) expression -> . expression OR expression
+    (7) expression -> . expression EQ expression
+    (8) expression -> . expression IMPLY expression
+    (9) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
+    (10) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (11) expression -> . FUTURE LBRACK NUMBER RBRACK expression
+    (12) expression -> . FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (13) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> . expression RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> . expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (17) expression -> . YESTERDAY expression
+    (18) expression -> . expression SINCE expression
+    (19) expression -> . expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (20) expression -> . ONCE expression
+    (21) expression -> . ONCE LBRACK NUMBER RBRACK expression
+    (22) expression -> . ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (23) expression -> . HISTORICALLY expression
+    (24) expression -> . HISTORICALLY LBRACK NUMBER RBRACK expression
+    (25) expression -> . HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> . LPAREN expression RPAREN
+    (27) expression -> . ATOMIC
+    (28) expression -> . TRUE
+    (29) expression -> . FALSE
+
+    NEG             shift and go to state 4
+    GLOBAL          shift and go to state 5
+    FUTURE          shift and go to state 6
+    YESTERDAY       shift and go to state 7
+    ONCE            shift and go to state 8
+    HISTORICALLY    shift and go to state 9
+    LPAREN          shift and go to state 10
+    ATOMIC          shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
+
+    expression                     shift and go to state 83
+
+state 77
+
+    (25) expression -> HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK . expression
+    (4) expression -> . expression AND expression
+    (5) expression -> . NEG expression
+    (6) expression -> . expression OR expression
+    (7) expression -> . expression EQ expression
+    (8) expression -> . expression IMPLY expression
+    (9) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
+    (10) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (11) expression -> . FUTURE LBRACK NUMBER RBRACK expression
+    (12) expression -> . FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (13) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> . expression RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> . expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (17) expression -> . YESTERDAY expression
+    (18) expression -> . expression SINCE expression
+    (19) expression -> . expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (20) expression -> . ONCE expression
+    (21) expression -> . ONCE LBRACK NUMBER RBRACK expression
+    (22) expression -> . ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (23) expression -> . HISTORICALLY expression
+    (24) expression -> . HISTORICALLY LBRACK NUMBER RBRACK expression
+    (25) expression -> . HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> . LPAREN expression RPAREN
+    (27) expression -> . ATOMIC
+    (28) expression -> . TRUE
+    (29) expression -> . FALSE
+
+    NEG             shift and go to state 4
+    GLOBAL          shift and go to state 5
+    FUTURE          shift and go to state 6
+    YESTERDAY       shift and go to state 7
+    ONCE            shift and go to state 8
+    HISTORICALLY    shift and go to state 9
+    LPAREN          shift and go to state 10
+    ATOMIC          shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
+
+    expression                     shift and go to state 84
+
+state 78
+
+    (14) expression -> expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK . expression
+    (4) expression -> . expression AND expression
+    (5) expression -> . NEG expression
+    (6) expression -> . expression OR expression
+    (7) expression -> . expression EQ expression
+    (8) expression -> . expression IMPLY expression
+    (9) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
+    (10) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (11) expression -> . FUTURE LBRACK NUMBER RBRACK expression
+    (12) expression -> . FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (13) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> . expression RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> . expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (17) expression -> . YESTERDAY expression
+    (18) expression -> . expression SINCE expression
+    (19) expression -> . expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (20) expression -> . ONCE expression
+    (21) expression -> . ONCE LBRACK NUMBER RBRACK expression
+    (22) expression -> . ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (23) expression -> . HISTORICALLY expression
+    (24) expression -> . HISTORICALLY LBRACK NUMBER RBRACK expression
+    (25) expression -> . HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> . LPAREN expression RPAREN
+    (27) expression -> . ATOMIC
+    (28) expression -> . TRUE
+    (29) expression -> . FALSE
+
+    NEG             shift and go to state 4
+    GLOBAL          shift and go to state 5
+    FUTURE          shift and go to state 6
+    YESTERDAY       shift and go to state 7
+    ONCE            shift and go to state 8
+    HISTORICALLY    shift and go to state 9
+    LPAREN          shift and go to state 10
+    ATOMIC          shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
+
+    expression                     shift and go to state 85
+
+state 79
+
+    (16) expression -> expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK . expression
+    (4) expression -> . expression AND expression
+    (5) expression -> . NEG expression
+    (6) expression -> . expression OR expression
+    (7) expression -> . expression EQ expression
+    (8) expression -> . expression IMPLY expression
+    (9) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
+    (10) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (11) expression -> . FUTURE LBRACK NUMBER RBRACK expression
+    (12) expression -> . FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (13) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> . expression RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> . expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (17) expression -> . YESTERDAY expression
+    (18) expression -> . expression SINCE expression
+    (19) expression -> . expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (20) expression -> . ONCE expression
+    (21) expression -> . ONCE LBRACK NUMBER RBRACK expression
+    (22) expression -> . ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (23) expression -> . HISTORICALLY expression
+    (24) expression -> . HISTORICALLY LBRACK NUMBER RBRACK expression
+    (25) expression -> . HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> . LPAREN expression RPAREN
+    (27) expression -> . ATOMIC
+    (28) expression -> . TRUE
+    (29) expression -> . FALSE
+
+    NEG             shift and go to state 4
+    GLOBAL          shift and go to state 5
+    FUTURE          shift and go to state 6
+    YESTERDAY       shift and go to state 7
+    ONCE            shift and go to state 8
+    HISTORICALLY    shift and go to state 9
+    LPAREN          shift and go to state 10
+    ATOMIC          shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
+
+    expression                     shift and go to state 86
+
+state 80
+
+    (19) expression -> expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK . expression
+    (4) expression -> . expression AND expression
+    (5) expression -> . NEG expression
+    (6) expression -> . expression OR expression
+    (7) expression -> . expression EQ expression
+    (8) expression -> . expression IMPLY expression
+    (9) expression -> . GLOBAL LBRACK NUMBER RBRACK expression
+    (10) expression -> . GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (11) expression -> . FUTURE LBRACK NUMBER RBRACK expression
+    (12) expression -> . FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (13) expression -> . expression UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> . expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> . expression RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> . expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (17) expression -> . YESTERDAY expression
+    (18) expression -> . expression SINCE expression
+    (19) expression -> . expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (20) expression -> . ONCE expression
+    (21) expression -> . ONCE LBRACK NUMBER RBRACK expression
+    (22) expression -> . ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (23) expression -> . HISTORICALLY expression
+    (24) expression -> . HISTORICALLY LBRACK NUMBER RBRACK expression
+    (25) expression -> . HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (26) expression -> . LPAREN expression RPAREN
+    (27) expression -> . ATOMIC
+    (28) expression -> . TRUE
+    (29) expression -> . FALSE
+
+    NEG             shift and go to state 4
+    GLOBAL          shift and go to state 5
+    FUTURE          shift and go to state 6
+    YESTERDAY       shift and go to state 7
+    ONCE            shift and go to state 8
+    HISTORICALLY    shift and go to state 9
+    LPAREN          shift and go to state 10
+    ATOMIC          shift and go to state 11
+    TRUE            shift and go to state 12
+    FALSE           shift and go to state 13
+
+    expression                     shift and go to state 87
+
+state 81
+
+    (10) expression -> GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression .
+    (4) expression -> expression . AND expression
+    (6) expression -> expression . OR expression
+    (7) expression -> expression . EQ expression
+    (8) expression -> expression . IMPLY expression
+    (13) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> expression . RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> expression . RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (18) expression -> expression . SINCE expression
+    (19) expression -> expression . SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+
+    SEMI            reduce using rule 10 (expression -> GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    AND             reduce using rule 10 (expression -> GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    OR              reduce using rule 10 (expression -> GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    EQ              reduce using rule 10 (expression -> GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    IMPLY           reduce using rule 10 (expression -> GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    UNTIL           reduce using rule 10 (expression -> GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    RELEASE         reduce using rule 10 (expression -> GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    SINCE           reduce using rule 10 (expression -> GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    RPAREN          reduce using rule 10 (expression -> GLOBAL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+
+  ! AND             [ shift and go to state 16 ]
+  ! OR              [ shift and go to state 17 ]
+  ! EQ              [ shift and go to state 18 ]
+  ! IMPLY           [ shift and go to state 19 ]
+  ! UNTIL           [ shift and go to state 20 ]
+  ! RELEASE         [ shift and go to state 21 ]
+  ! SINCE           [ shift and go to state 22 ]
+
+
+state 82
+
+    (12) expression -> FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression .
+    (4) expression -> expression . AND expression
+    (6) expression -> expression . OR expression
+    (7) expression -> expression . EQ expression
+    (8) expression -> expression . IMPLY expression
+    (13) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> expression . RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> expression . RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (18) expression -> expression . SINCE expression
+    (19) expression -> expression . SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+
+    SEMI            reduce using rule 12 (expression -> FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    AND             reduce using rule 12 (expression -> FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    OR              reduce using rule 12 (expression -> FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    EQ              reduce using rule 12 (expression -> FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    IMPLY           reduce using rule 12 (expression -> FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    UNTIL           reduce using rule 12 (expression -> FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    RELEASE         reduce using rule 12 (expression -> FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    SINCE           reduce using rule 12 (expression -> FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    RPAREN          reduce using rule 12 (expression -> FUTURE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+
+  ! AND             [ shift and go to state 16 ]
+  ! OR              [ shift and go to state 17 ]
+  ! EQ              [ shift and go to state 18 ]
+  ! IMPLY           [ shift and go to state 19 ]
+  ! UNTIL           [ shift and go to state 20 ]
+  ! RELEASE         [ shift and go to state 21 ]
+  ! SINCE           [ shift and go to state 22 ]
+
+
+state 83
+
+    (22) expression -> ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression .
+    (4) expression -> expression . AND expression
+    (6) expression -> expression . OR expression
+    (7) expression -> expression . EQ expression
+    (8) expression -> expression . IMPLY expression
+    (13) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> expression . RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> expression . RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (18) expression -> expression . SINCE expression
+    (19) expression -> expression . SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+
+    SEMI            reduce using rule 22 (expression -> ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    AND             reduce using rule 22 (expression -> ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    OR              reduce using rule 22 (expression -> ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    EQ              reduce using rule 22 (expression -> ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    IMPLY           reduce using rule 22 (expression -> ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    UNTIL           reduce using rule 22 (expression -> ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    RELEASE         reduce using rule 22 (expression -> ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    SINCE           reduce using rule 22 (expression -> ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    RPAREN          reduce using rule 22 (expression -> ONCE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+
+  ! AND             [ shift and go to state 16 ]
+  ! OR              [ shift and go to state 17 ]
+  ! EQ              [ shift and go to state 18 ]
+  ! IMPLY           [ shift and go to state 19 ]
+  ! UNTIL           [ shift and go to state 20 ]
+  ! RELEASE         [ shift and go to state 21 ]
+  ! SINCE           [ shift and go to state 22 ]
+
+
+state 84
+
+    (25) expression -> HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression .
+    (4) expression -> expression . AND expression
+    (6) expression -> expression . OR expression
+    (7) expression -> expression . EQ expression
+    (8) expression -> expression . IMPLY expression
+    (13) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> expression . RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> expression . RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (18) expression -> expression . SINCE expression
+    (19) expression -> expression . SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+
+    SEMI            reduce using rule 25 (expression -> HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    AND             reduce using rule 25 (expression -> HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    OR              reduce using rule 25 (expression -> HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    EQ              reduce using rule 25 (expression -> HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    IMPLY           reduce using rule 25 (expression -> HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    UNTIL           reduce using rule 25 (expression -> HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    RELEASE         reduce using rule 25 (expression -> HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    SINCE           reduce using rule 25 (expression -> HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    RPAREN          reduce using rule 25 (expression -> HISTORICALLY LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+
+  ! AND             [ shift and go to state 16 ]
+  ! OR              [ shift and go to state 17 ]
+  ! EQ              [ shift and go to state 18 ]
+  ! IMPLY           [ shift and go to state 19 ]
+  ! UNTIL           [ shift and go to state 20 ]
+  ! RELEASE         [ shift and go to state 21 ]
+  ! SINCE           [ shift and go to state 22 ]
+
+
+state 85
+
+    (14) expression -> expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression .
+    (4) expression -> expression . AND expression
+    (6) expression -> expression . OR expression
+    (7) expression -> expression . EQ expression
+    (8) expression -> expression . IMPLY expression
+    (13) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> expression . RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> expression . RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (18) expression -> expression . SINCE expression
+    (19) expression -> expression . SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+
+    SEMI            reduce using rule 14 (expression -> expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    AND             reduce using rule 14 (expression -> expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    OR              reduce using rule 14 (expression -> expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    EQ              reduce using rule 14 (expression -> expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    IMPLY           reduce using rule 14 (expression -> expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    UNTIL           reduce using rule 14 (expression -> expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    RELEASE         reduce using rule 14 (expression -> expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    SINCE           reduce using rule 14 (expression -> expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    RPAREN          reduce using rule 14 (expression -> expression UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+
+  ! AND             [ shift and go to state 16 ]
+  ! OR              [ shift and go to state 17 ]
+  ! EQ              [ shift and go to state 18 ]
+  ! IMPLY           [ shift and go to state 19 ]
+  ! UNTIL           [ shift and go to state 20 ]
+  ! RELEASE         [ shift and go to state 21 ]
+  ! SINCE           [ shift and go to state 22 ]
+
+
+state 86
+
+    (16) expression -> expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression .
+    (4) expression -> expression . AND expression
+    (6) expression -> expression . OR expression
+    (7) expression -> expression . EQ expression
+    (8) expression -> expression . IMPLY expression
+    (13) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> expression . RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> expression . RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (18) expression -> expression . SINCE expression
+    (19) expression -> expression . SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+
+    SEMI            reduce using rule 16 (expression -> expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    AND             reduce using rule 16 (expression -> expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    OR              reduce using rule 16 (expression -> expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    EQ              reduce using rule 16 (expression -> expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    IMPLY           reduce using rule 16 (expression -> expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    UNTIL           reduce using rule 16 (expression -> expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    RELEASE         reduce using rule 16 (expression -> expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    SINCE           reduce using rule 16 (expression -> expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    RPAREN          reduce using rule 16 (expression -> expression RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+
+  ! AND             [ shift and go to state 16 ]
+  ! OR              [ shift and go to state 17 ]
+  ! EQ              [ shift and go to state 18 ]
+  ! IMPLY           [ shift and go to state 19 ]
+  ! UNTIL           [ shift and go to state 20 ]
+  ! RELEASE         [ shift and go to state 21 ]
+  ! SINCE           [ shift and go to state 22 ]
+
+
+state 87
+
+    (19) expression -> expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression .
+    (4) expression -> expression . AND expression
+    (6) expression -> expression . OR expression
+    (7) expression -> expression . EQ expression
+    (8) expression -> expression . IMPLY expression
+    (13) expression -> expression . UNTIL LBRACK NUMBER RBRACK expression
+    (14) expression -> expression . UNTIL LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (15) expression -> expression . RELEASE LBRACK NUMBER RBRACK expression
+    (16) expression -> expression . RELEASE LBRACK NUMBER COMMA NUMBER RBRACK expression
+    (18) expression -> expression . SINCE expression
+    (19) expression -> expression . SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression
+
+    SEMI            reduce using rule 19 (expression -> expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    AND             reduce using rule 19 (expression -> expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    OR              reduce using rule 19 (expression -> expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    EQ              reduce using rule 19 (expression -> expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    IMPLY           reduce using rule 19 (expression -> expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    UNTIL           reduce using rule 19 (expression -> expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    RELEASE         reduce using rule 19 (expression -> expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    SINCE           reduce using rule 19 (expression -> expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+    RPAREN          reduce using rule 19 (expression -> expression SINCE LBRACK NUMBER COMMA NUMBER RBRACK expression .)
+
+  ! AND             [ shift and go to state 16 ]
+  ! OR              [ shift and go to state 17 ]
+  ! EQ              [ shift and go to state 18 ]
+  ! IMPLY           [ shift and go to state 19 ]
+  ! UNTIL           [ shift and go to state 20 ]
+  ! RELEASE         [ shift and go to state 21 ]
+  ! SINCE           [ shift and go to state 22 ]
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for AND in state 11 resolved as shift
-WARNING: shift/reduce conflict for OR in state 11 resolved as shift
-WARNING: shift/reduce conflict for UNTIL in state 11 resolved as shift
-WARNING: shift/reduce conflict for AND in state 15 resolved as shift
-WARNING: shift/reduce conflict for OR in state 15 resolved as shift
-WARNING: shift/reduce conflict for UNTIL in state 15 resolved as shift
+WARNING: shift/reduce conflict for AND in state 27 resolved as shift
+WARNING: shift/reduce conflict for OR in state 27 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 27 resolved as shift
+WARNING: shift/reduce conflict for IMPLY in state 27 resolved as shift
+WARNING: shift/reduce conflict for UNTIL in state 27 resolved as shift
+WARNING: shift/reduce conflict for RELEASE in state 27 resolved as shift
+WARNING: shift/reduce conflict for SINCE in state 27 resolved as shift
+WARNING: shift/reduce conflict for AND in state 29 resolved as shift
+WARNING: shift/reduce conflict for OR in state 29 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 29 resolved as shift
+WARNING: shift/reduce conflict for IMPLY in state 29 resolved as shift
+WARNING: shift/reduce conflict for UNTIL in state 29 resolved as shift
+WARNING: shift/reduce conflict for RELEASE in state 29 resolved as shift
+WARNING: shift/reduce conflict for SINCE in state 29 resolved as shift
