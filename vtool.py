@@ -163,8 +163,6 @@ app.layout = html.Div([
                     
                     dcc.Markdown(d("---\n### Results for Timing and Resource")),
                     html.Div(
-                        # className = 'three columns',
-                        # style=styles['json-output'],
                         children = [
                             dcc.Markdown(d("**Worst-case Execution Time**")),
                             html.Div(id="comp_speed",),
