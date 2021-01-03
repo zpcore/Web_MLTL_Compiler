@@ -14,6 +14,7 @@ import plotly.graph_objects as go
 # import MLTL compiler
 from MLTL_Compiler import *
 from MLTL_Resource import *
+from Software_Time import *
 
 cyto.load_extra_layouts()
 
@@ -85,7 +86,9 @@ styles = {
     'tab': {'height': 'calc(98vh - 115px)'},
 }
 
-app.layout = html.Div([
+app.layout = html.Div(
+
+    children = [
 ################title
     html.Div(
         [html.H1('R2U2 MLTL Compiler')],
@@ -124,50 +127,82 @@ app.layout = html.Div([
                             **Prediction Horizon Hp**  
                             """)),
                     dcc.Input(id='pred_length', value='0', type='text'),
-
-                    dcc.Markdown(d("---\n### System Configuration")),
-                    dcc.Markdown(d("**Hardware Clock Frequency (MHz)**")),
-                    dcc.Input(id='hardware_clk', value='100', type='text'),
-                    dcc.Markdown(d("**LUT Type Select**")),
-                    dcc.Dropdown(
-                        id = 'LUT_type',
-                        options=[
-                            {'label': 'LUT-3', 'value': '3'},
-                            {'label': 'LUT-4', 'value': '4'},
-                            {'label': 'LUT-6', 'value': '6'},
-                        ],
-                        value='3',
-                        clearable=False
-                    ),
-                    dcc.Markdown(d("**Resource to Observe Select**")),
-                    dcc.Dropdown(
-                        id = 'resource_type',
-                        options=[
-                            {'label': 'LUT', 'value': 'LUT'},
-                            {'label': '18Kb BRAM', 'value': '18kbBRAM'},
-                        ],
-                        value='LUT',
-                        clearable=False
-                    ),  
-
-                    dcc.Markdown(d("**Timestamp Length (bit)**")),
-                    dcc.Slider(
-                        id='timestamp_length',
-                        min=0,
-                        max=64,
-                        step=1,
-                        value=32,
-                    ),
-                    html.Div(id='slider-output-container-ts'),
-                    # dcc.Input(id='timestamp_length', value='32', type='text'),
-                    
-                    dcc.Markdown(d("---\n### Results for Timing and Resource")),
                     html.Div(
+                        style={'backgroundColor': '#F7FAC0'},
+                        children  = [
+                        dcc.Markdown(d("---\n### Hardware System Configuration")),
+                        dcc.Markdown(d("**Hardware Clock Frequency (MHz)**")),
+                        dcc.Input(style={'backgroundColor': '#F7FAC0'},id='hardware_clk', value='100', type='text'),
+                        dcc.Markdown(d("**LUT Type Select**")),
+                        dcc.Dropdown(
+                            id = 'LUT_type',
+                            style={'backgroundColor': '#F7FAC0'},
+                            options=[
+                                {'label': 'LUT-3', 'value': '3'},
+                                {'label': 'LUT-4', 'value': '4'},
+                                {'label': 'LUT-6', 'value': '6'},
+                            ],
+                            value='3',
+                            clearable=False
+                        ),
+                        dcc.Markdown(d("**Resource to Observe Select**")),
+                        dcc.Dropdown(
+                            id = 'resource_type',
+                            style={'backgroundColor': '#F7FAC0'},
+                            options=[
+                                {'label': 'LUT', 'value': 'LUT'},
+                                {'label': '18Kb BRAM', 'value': '18kbBRAM'},
+                            ],
+                            value='LUT',
+                            clearable=False
+                        ),  
+
+                        dcc.Markdown(d("**Timestamp Length (bit)**")),
+                        dcc.Slider(
+                            id='timestamp_length',
+                            min=0,
+                            max=64,
+                            step=1,
+                            value=32,
+                        ),
+                        # html.Div(style="width:500px;height:100px;border:1px solid #000;"),
+                        html.Div(id='slider-output-container-ts'),
+                        # dcc.Input(id='timestamp_length', value='32', type='text'),
+                        html.Div(
+                        # style={'backgroundColor': '#A2F0E4'},
                         children = [
+                            dcc.Markdown(d("---\n### Results for Timing and Resource")),
                             dcc.Markdown(d("**Worst-case Execution Time**")),
-                            html.Div(id="comp_speed",),
+                            html.Div(id="comp_speed_FPGA",),
                             dcc.Markdown(d("**Total Entry of SCQ for the AST**")),
                             html.Div(id="tot_scq_size",),
+                        ]
+                    ),
+
+
+                        ],
+                    ),
+                    
+                    
+
+                    
+                    html.Div(
+                        style={'backgroundColor': '#A2F0E4'},
+                        children = [
+                            dcc.Markdown(d("---\n### Software System Configuration")),
+                            # Command exection time for each operator
+                            dcc.Markdown(d("**CPU Clock Cycle for Each Operator**")),
+                            dcc.Input(style={'backgroundColor': '#A2F0E4'}, id='op_exe_time', value='10', type='text'),
+                            # Processing time for each atomic checker
+                            dcc.Markdown(d("**CPU Clock Cycle for Each Atomic Checker**")),
+                            dcc.Input(style={'backgroundColor': '#A2F0E4'}, id='at_exe_time', value='10', type='text'),
+
+                            dcc.Markdown(d("**CPU Clock Frequency (GHz)**")),
+                            dcc.Input(style={'backgroundColor': '#A2F0E4'}, id='cpu_clk', value='10', type='text'),
+                            dcc.Markdown(d("**Worst-case Execution Time**")),
+                            html.Div(id="comp_speed_CPU",),
+                            dcc.Markdown(d("**Total Memory usage for SCQ**")),
+                            html.Div(id="tot_memory",),
                         ]
                     )
                     ],
@@ -279,13 +314,26 @@ def displayMouseoverNodeData(data):
     return html.P('Node: '+str(data['num']))
 
 
+def speed_unit_conversion(clk):
+    if clk < 0:
+        comp_speed = "Err: Operator unsupported in hardware!"
+    elif clk<1000:
+        comp_speed = '{:.6f}μs/ {:.6f}MHz'.format(clk, 1/clk) 
+    elif clk<1000000:
+        comp_speed = '{:.6f}ms/ {:.6f}KHz'.format(clk/1000, 1/(clk/1000)) 
+    else:
+        comp_speed = '{:.6f}s/ {:.6f}Hz'.format(clk/1000000, 1/(clk/1000000))
+    return comp_speed
+
 @app.callback( # multiple output is a new feature since dash==0.39.0
     [Output(component_id = 'tree', component_property = 'elements'),
     Output(component_id = 'assembly_window', component_property = 'children'),
     Output(component_id = 'compile_status', component_property = 'children'),
     Output(component_id = 'compile_status', component_property = 'style'),
-    Output(component_id = 'comp_speed', component_property = 'children'),
+    Output(component_id = 'comp_speed_FPGA', component_property = 'children'),
+    Output(component_id = 'comp_speed_CPU', component_property = 'children'),
     Output(component_id = 'tot_scq_size', component_property = 'children'),
+    Output(component_id = 'tot_memory', component_property = 'children'),
     Output(component_id = 'resource_usage', component_property = 'figure'),
     ],
     [Input(component_id = 'formula', component_property = 'value'),
@@ -295,9 +343,12 @@ def displayMouseoverNodeData(data):
     Input(component_id = 'timestamp_length', component_property = 'value'),
     Input(component_id = 'LUT_type', component_property = 'value'),
     Input(component_id = 'resource_type', component_property = 'value'),
+    Input(component_id = 'op_exe_time', component_property = 'value'),
+    Input(component_id = 'at_exe_time', component_property = 'value'),
+    Input(component_id = 'cpu_clk', component_property = 'value'),
     ]
 )
-def update_element(formula, optimization, pred_length, hw_clk, timestamp_length, LUT_type, resource_type):
+def update_element(formula, optimization, pred_length, hw_clk, timestamp_length, LUT_type, resource_type, op_exe_time, at_exe_time, cpu_clk):
     opt_cse = True if 'opt_cse' in optimization else False
     pg = Postgraph(MLTL=formula,Hp=int(pred_length),optimize_cse=opt_cse)
     compile_status = "Compile status: "+ pg.status.upper()
@@ -305,7 +356,8 @@ def update_element(formula, optimization, pred_length, hw_clk, timestamp_length,
         elements = []
         assembly_window = 'Error'
         style = {'color':'red'}
-        comp_speed = 'NA'
+        comp_speed_FPGA = 'NA'
+        comp_speed_CPU = 'NA'
     else:
         node = [
             {'data':{'id': str(node), 'num': num, 'type': node.type, 'name':node.name,'bpd':node.bpd, 'wpd':node.wpd, 'scq_size':node.scq_size} }
@@ -313,6 +365,7 @@ def update_element(formula, optimization, pred_length, hw_clk, timestamp_length,
         ]
 
         edge = []
+        atomic_op = set()
         for src in pg.valid_node_set:
             if (src.left):
                 edge.append({'data':{'source':str(src), 'target':str(src.left)}})
@@ -320,32 +373,30 @@ def update_element(formula, optimization, pred_length, hw_clk, timestamp_length,
             if (src.right):
                 edge.append({'data':{'source':str(src), 'target':str(src.right)}})
 
+            if (src.left==None and src.right==None):
+                atomic_op.add(src)
+
         elements = node + edge
         assembly_window = pg.asm
         style = {'color':'blue'}
-        tot_scq_size = pg.tot_size
+        tot_memory = str(pg.tot_size*timestamp_length/8/1024)+"KB" #KB
+        tot_scq_size = str(pg.tot_size) # + "(" + str()+ ")"
         tmp = pg.tot_time/int(hw_clk)
-        if tmp < 0:
-            comp_speed = "Err: Operator unsupported in hardware!"
-        elif tmp<1000:
-            comp_speed = '{:.6f}μs/ {:.6f}MHz'.format(tmp, 1/tmp) 
-        elif tmp<1000000:
-            comp_speed = '{:.6f}ms/ {:.6f}KHz'.format(tmp/1000, 1/(tmp/1000)) 
-        else:
-            comp_speed = '{:.6f}s/ {:.6f}Hz'.format(tmp/1000000, 1/(tmp/1000000))
-
+        comp_speed_FPGA = speed_unit_conversion(tmp)
+        comp_speed_CPU = speed_unit_conversion(int(at_exe_time)*len(atomic_op)+int(op_exe_time)*pg.tot_size/int(cpu_clk))
         resource_fig = data_process.RF
 
         resource_fig.config(LUT_type, tot_scq_size, int(timestamp_length))
         select_fig = resource_fig.get_LUT_fig() if resource_type == "LUT" else resource_fig.get_BRAM_fig()
 
-    return elements, assembly_window, compile_status, style, comp_speed, tot_scq_size, select_fig
+    return elements, assembly_window, compile_status, style, comp_speed_FPGA, comp_speed_CPU , tot_scq_size, tot_memory, select_fig
 
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    app.run_server(debug=True)
 
 
 
 
 
 
+           

@@ -15,6 +15,7 @@ class Postgraph():
         self.valid_node_set = []
         self.cnt2node = {}
         self.asm = ''
+        self.predLen = Hp
         # MLTLparse.cnt2node.clear() # clear var for multiple runs
         # MLTLparse.operator_cnt = 0 # clear var for multiple runs
         MLTLparse.reset()
@@ -133,7 +134,8 @@ class Postgraph():
                 if (not isinstance(n, Observer)):# the propogation delay only applies to Observer node
                     continue
                 if(n.type=='ATOM'):
-                    n.bpd = -1*predLen
+                    # n.bpd = -1*predLen # after discussion with DR.Jones, the bpd is not associated with prediction length anymore.
+                    n.bpd = 0
                     n.scq_size = 1
                 elif(n.type=='BOOL'):
                     n.bpd = 0
@@ -166,7 +168,7 @@ class Postgraph():
             for n in vstack: 
                 # added on May 9, 2020: to consider the extra space for potential output in one time stamp
                 if (isinstance(n, Observer)):
-                    n.scq_size += n.wpd-n.bpd+2
+                    n.scq_size += n.wpd-n.bpd+2+predLen
 
 
         def get_total_size():
@@ -198,7 +200,7 @@ class Postgraph():
     def estimate_update_rate(self):
         # -1 means not yet implemented in hardware
         laten_tab = {
-            "ATOM":     {"initial":15, "exec":0},
+            "ATOM":     {"initial":15, "exec":1},
             "BOOL":     {"initial":15, "exec":0},
             "NEG":      {"initial":17, "exec":16},
             "YES":      {"initial":-1, "exec":-1},
@@ -219,8 +221,10 @@ class Postgraph():
             if isinstance(node, Observer):
                 if (laten_tab[node.type]["initial"] is -1): # unsupported operator type in hardware
                     return -1                                
-                max_in = max([child.scq_size for child in node.child]) if len(node.child)>0 else 0
-                tot_time += laten_tab[node.type]["initial"]+laten_tab[node.type]["exec"]*max_in
+                #max_in = max([child.scq_size for child in node.child]) if len(node.child)>0 else 0
+                # Dec.28/2020: use max_out instead of max_in to compute total execution time
+                max_out = node.wpd-node.bpd+self.predLen
+                tot_time += laten_tab[node.type]["initial"]+laten_tab[node.type]["exec"]*max_out
         return tot_time
 
     # Generate assembly code
