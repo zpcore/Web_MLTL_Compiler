@@ -18,6 +18,7 @@ class AST_node():
 
     @staticmethod
     def reset():
+        AST_node.cnt2node = {}
         cnt2node = {}
         node_cnt = 0
         AST_node.node_cnt = 0

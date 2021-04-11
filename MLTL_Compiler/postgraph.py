@@ -168,7 +168,8 @@ class Postgraph():
             for n in vstack: 
                 # added on May 9, 2020: to consider the extra space for potential output in one time stamp
                 if (isinstance(n, Observer)):
-                    n.scq_size += n.wpd-n.bpd+2+predLen
+                    # n.scq_size += n.wpd-n.bpd+2+predLen
+                    n.scq_size += n.wpd-n.bpd+1+predLen
 
 
         def get_total_size():
@@ -223,8 +224,13 @@ class Postgraph():
                     return -1                                
                 #max_in = max([child.scq_size for child in node.child]) if len(node.child)>0 else 0
                 # Dec.28/2020: use max_out instead of max_in to compute total execution time
-                max_out = node.wpd-node.bpd+self.predLen
-                tot_time += laten_tab[node.type]["initial"]+laten_tab[node.type]["exec"]*max_out
+                # max_out = node.wpd-node.bpd+self.predLen
+                # Feb.4.2021: Use sum of input SCQ size to compute total execution time
+                if (node.type=="ATOM"):
+                    tot_time += laten_tab[node.type]["initial"]+laten_tab[node.type]["exec"]*(1+self.predLen)+3
+                else:
+                    sum_in = sum([child.scq_size for child in node.child]) if len(node.child)>0 else 0
+                    tot_time += laten_tab[node.type]["initial"]+laten_tab[node.type]["exec"]*sum_in+3
         return tot_time
 
     # Generate assembly code
